@@ -20,3 +20,6 @@ conda activate tf
 conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
 pip install --upgrade pip
 pip install "tensorflow<2.11" --user
+
+#para utilizar alguns wrappers:
+pip install scikeras  
