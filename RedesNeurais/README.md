@@ -23,3 +23,5 @@ pip install "tensorflow<2.11" --user
 
 #para utilizar alguns wrappers:
 pip install scikeras  
+pip install imblearn 
+
