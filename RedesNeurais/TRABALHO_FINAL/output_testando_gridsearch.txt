@@ -1,0 +1,125 @@
+Sem faze OHE, e usando normalizacao STANDARD e sem filter selection
+Best: 0.880193 using {'epochs': 2500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 20, 'model__optimizer': 'adam'}
+
+feature selection com 5 mais relevantes
+Best: 0.735266 using {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 2, 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam'}
+
+
+Best: 0.938647 using {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 16, 'model__optimizer': 'adam'}
+0.932850 (0.044523) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 8, 'model__optimizer': 'adam'}
+0.914976 (0.036994) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 8, 'model__optimizer': 'rmsprop'}
+0.938647 (0.023047) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 16, 'model__optimizer': 'adam'}
+0.923671 (0.024803) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 16, 'model__optimizer': 'rmsprop'}
+0.894203 (0.027473) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 8, 'model__optimizer': 'adam'}
+0.894686 (0.021256) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 8, 'model__optimizer': 'rmsprop'}
+0.904831 (0.029921) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 16, 'model__optimizer': 'adam'}
+0.910628 (0.023419) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 16, 'model__optimizer': 'rmsprop'}
+
+Best: 0.928000 using {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 8}
+0.928000 (0.070792) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 8}
+0.923333 (0.061716) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 16}
+0.916667 (0.060480) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 24}
+0.912667 (0.069006) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 32}
+0.880000 (0.045216) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 8}
+0.888000 (0.044652) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 16}
+0.880667 (0.051312) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 24}
+0.881333 (0.044202) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 32}
+0.902667 (0.054381) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 2, 'model__loss_function': 'mse', 'model__neurons': 8}
+0.901333 (0.054593) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 2, 'model__loss_function': 'mse', 'model__neurons': 16}
+0.889333 (0.056624) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 2, 'model__loss_function': 'mse', 'model__neurons': 24}
+0.880000 (0.052068) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 2, 'model__loss_function': 'mse', 'model__neurons': 32}
+0.882667 (0.046781) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 2, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 8}
+0.882000 (0.047917) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 2, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 16}
+0.874000 (0.046303) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 2, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 24}
+0.870667 (0.041868) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 2, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 32}
+0.900667 (0.060933) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 3, 'model__loss_function': 'mse', 'model__neurons': 8}
+0.879333 (0.047206) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 3, 'model__loss_function': 'mse', 'model__neurons': 16}
+0.873333 (0.056411) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 3, 'model__loss_function': 'mse', 'model__neurons': 24}
+0.880667 (0.055913) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 3, 'model__loss_function': 'mse', 'model__neurons': 32}
+0.884000 (0.045038) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 3, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 8}
+0.865333 (0.046790) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 3, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 16}
+0.864000 (0.048507) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 3, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 24}
+0.868000 (0.048332) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 3, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 32}
+0.884000 (0.053765) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 4, 'model__loss_function': 'mse', 'model__neurons': 8}
+0.874667 (0.044252) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 4, 'model__loss_function': 'mse', 'model__neurons': 16}
+0.872667 (0.054748) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 4, 'model__loss_function': 'mse', 'model__neurons': 24}
+0.872000 (0.058712) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 4, 'model__loss_function': 'mse', 'model__neurons': 32}
+0.867333 (0.065299) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 4, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 8}
+0.870667 (0.052043) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 4, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 16}
+0.867333 (0.053058) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 4, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 24}
+0.860667 (0.048598) with: {'epochs': 1000, 'model__activation': 'tanh', 'model__hidden_layers': 4, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 32}
+0.842000 (0.066520) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 8}
+0.865333 (0.064588) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 16}
+0.867333 (0.062872) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 24}
+0.877333 (0.067310) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 32}
+0.844667 (0.060977) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 8}
+0.859333 (0.067475) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 16}
+0.873333 (0.052957) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 24}
+0.873333 (0.055458) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 32}
+0.857333 (0.061442) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 2, 'model__loss_function': 'mse', 'model__neurons': 8}
+0.867333 (0.057750) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 2, 'model__loss_function': 'mse', 'model__neurons': 16}
+0.875333 (0.055921) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 2, 'model__loss_function': 'mse', 'model__neurons': 24}
+0.869333 (0.060933) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 2, 'model__loss_function': 'mse', 'model__neurons': 32}
+0.856667 (0.058233) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 2, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 8}
+0.869333 (0.041494) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 2, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 16}
+0.881333 (0.054349) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 2, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 24}
+0.867333 (0.053141) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 2, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 32}
+0.864000 (0.059157) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 3, 'model__loss_function': 'mse', 'model__neurons': 8}
+0.868667 (0.056356) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 3, 'model__loss_function': 'mse', 'model__neurons': 16}
+0.854000 (0.060641) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 3, 'model__loss_function': 'mse', 'model__neurons': 24}
+0.856667 (0.057504) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 3, 'model__loss_function': 'mse', 'model__neurons': 32}
+0.858667 (0.064312) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 3, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 8}
+0.858000 (0.052349) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 3, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 16}
+0.852000 (0.048378) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 3, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 24}
+0.854667 (0.053233) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 3, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 32}
+0.849333 (0.059904) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 4, 'model__loss_function': 'mse', 'model__neurons': 8}
+0.865333 (0.063056) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 4, 'model__loss_function': 'mse', 'model__neurons': 16}
+0.862667 (0.055072) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 4, 'model__loss_function': 'mse', 'model__neurons': 24}
+0.857333 (0.058553) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 4, 'model__loss_function': 'mse', 'model__neurons': 32}
+0.858000 (0.053108) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 4, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 8}
+0.855333 (0.053400) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 4, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 16}
+0.852667 (0.047954) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 4, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 24}
+0.852667 (0.050217) with: {'epochs': 1000, 'model__activation': 'relu', 'model__hidden_layers': 4, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 32}
+
+
+Best: 0.686957 using {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'he_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 1.0}
+0.679227 (0.030569) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 1.0}
+0.681643 (0.036389) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 2.0}
+0.678744 (0.033747) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 3.0}
+0.674879 (0.034621) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 4.0}
+0.677295 (0.033803) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 5.0}
+0.686957 (0.027735) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'lecun_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 1.0}
+0.674879 (0.024328) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'lecun_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 2.0}
+0.673430 (0.037681) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'lecun_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 3.0}
+0.677295 (0.037220) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'lecun_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 4.0}
+0.678261 (0.034682) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'lecun_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 5.0}
+0.677778 (0.025499) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 1.0}
+0.677295 (0.033664) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 2.0}
+0.677778 (0.034587) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 3.0}
+0.684541 (0.036937) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 4.0}
+0.676329 (0.032872) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 5.0}
+0.676329 (0.031605) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'zero', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 1.0}
+0.678261 (0.032744) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'zero', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 2.0}
+0.685990 (0.032154) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'zero', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 3.0}
+0.681643 (0.032565) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'zero', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 4.0}
+0.676329 (0.035925) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'zero', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 5.0}
+0.684058 (0.026566) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'glorot_normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 1.0}
+0.680676 (0.031950) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'glorot_normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 2.0}
+0.677778 (0.034621) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'glorot_normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 3.0}
+0.679710 (0.033525) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'glorot_normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 4.0}
+0.677295 (0.034043) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'glorot_normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 5.0}
+0.685024 (0.026176) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'glorot_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 1.0}
+0.681159 (0.035269) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'glorot_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 2.0}
+0.679227 (0.032672) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'glorot_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 3.0}
+0.673913 (0.034194) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'glorot_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 4.0}
+0.671014 (0.038508) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'glorot_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 5.0}
+0.685507 (0.027936) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'he_normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 1.0}
+0.676329 (0.038253) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'he_normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 2.0}
+0.678744 (0.030895) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'he_normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 3.0}
+0.674879 (0.038241) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'he_normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 4.0}
+0.671014 (0.031323) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'he_normal', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 5.0}
+0.686957 (0.024990) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'he_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 1.0}
+0.684058 (0.030986) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'he_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 2.0}
+0.675845 (0.033899) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'he_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 3.0}
+0.677778 (0.037220) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'he_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 4.0}
+0.676329 (0.034601) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__kernel_init': 'he_uniform', 'model__loss_function': 'mse', 'model__neurons': 40, 'model__optimizer': 'adam', 'model__weight_constraint': 5.0}
