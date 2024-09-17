@@ -1,3 +1,14 @@
+batch_size= 16
+lr = 0.0002
+Best: 0.883092 using {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 32, 'model__optimizer': 'rmsprop'}
+0.865217 (0.029717) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 16, 'model__optimizer': 'rmsprop'}
+0.872464 (0.030797) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 24, 'model__optimizer': 'rmsprop'}
+0.883092 (0.033906) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 32, 'model__optimizer': 'rmsprop'}
+0.868116 (0.022379) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 2, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 16, 'model__optimizer': 'rmsprop'}
+0.881159 (0.033168) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 2, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 24, 'model__optimizer': 'rmsprop'}
+0.881159 (0.028351) with: {'epochs': 1500, 'model__activation': 'tanh', 'model__hidden_layers': 2, 'model__loss_function': 'binary_crossentropy', 'model__neurons': 32, 'model__optimizer': 'rmsprop'}
+
+
 Sem faze OHE, e usando normalizacao STANDARD e sem filter selection
 Best: 0.880193 using {'epochs': 2500, 'model__activation': 'tanh', 'model__hidden_layers': 1, 'model__loss_function': 'mse', 'model__neurons': 20, 'model__optimizer': 'adam'}
 

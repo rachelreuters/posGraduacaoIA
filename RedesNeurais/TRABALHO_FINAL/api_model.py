@@ -5,9 +5,10 @@ import os
 from deploy_model import model_
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 
 model = model_()
 
@@ -27,6 +28,7 @@ def predict():
 	features = ['EducationLevel','ExperienceYears','InterviewScore',
 				'SkillScore','PersonalityScore','RecruitmentStrategy']
 	
+
 	recrutamento = [[1,2,3]]
 
 
