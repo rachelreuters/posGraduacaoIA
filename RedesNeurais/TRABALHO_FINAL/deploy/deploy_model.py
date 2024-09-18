@@ -8,7 +8,7 @@ from tensorflow.keras.models import model_from_json
 # Carrega os arquivos do modelo
 def model_(): 
 	this_folder = pathlib.Path.cwd()
-	data_folder = this_folder/"RedesNeurais"/"TRABALHO_FINAL"
+	data_folder = this_folder/"RedesNeurais"/"TRABALHO_FINAL"/"deploy"
 	json_file = open(data_folder/"model"/"model.json", 'r')
 	loaded_model_json = json_file.read()
 	json_file.close()
