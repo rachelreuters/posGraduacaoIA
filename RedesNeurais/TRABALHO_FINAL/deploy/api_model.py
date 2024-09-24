@@ -2,10 +2,14 @@ from flask import Flask, request, jsonify
 import numpy as np
 import json
 import os
+
+from sklearn.discriminant_analysis import StandardScaler
+from normalization import normalization_
 from deploy_model import model_
 import pandas as pd
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder, QuantileTransformer
 from flask_cors import CORS
+import pandas as pd
 
 app = Flask(__name__)
 CORS(app)
@@ -41,11 +45,31 @@ def predict():
 
 	input_final_np = filtrado.to_numpy()
 
+
+	input_final_np = normalization_(features, input_final_np)
+
+
 	# faz a predicao com o modelo carregado
 	out = model.predict(input_final_np)
 
-	response = {'contratar': str(out[0][0])}
-	return jsonify(response), 200
+	# Calcular a porcentagem
+	percentage = float(out[0][0]) * 100
+
+	# Determinar a mensagem baseada na porcentagem
+	if percentage >= 90:
+		message = "O candidato deve ser contratado."
+	else:
+		message = "O candidato não deve ser contratado."
+
+	# Preparar a resposta
+	response = {
+		'contratar': percentage >= 90,
+		'porcentagem': f"{percentage:.2f}%",
+		'mensagem': message
+	}
+
+	return jsonify(content=response) , 200
+
 
 if __name__ == "__main__":
 	port = int(os.environ.get('PORT', 5000))
