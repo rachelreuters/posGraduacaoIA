@@ -46,7 +46,7 @@ def predict():
 	input_final_np = filtrado.to_numpy()
 
 
-	input_final_np = normalization_(features, input_final_np)
+	input_final_np = normalization_(input_final_np)
 
 
 	# faz a predicao com o modelo carregado
