@@ -6,3 +6,4 @@ scipy==1.13.1
 seaborn==0.13.2
 scikit-learn-extra==0.3.0
 data_science_utils==1.8.0
+hdbscan==0.8.40
