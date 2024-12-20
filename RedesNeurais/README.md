@@ -3,6 +3,11 @@
 
 Todos os estudos e projetos da disciplina de Redes Neurais
 
+Dica para configurar o notebook para resetar o modulo quando ele for modificado (por exemplo adicionado um metodo novo)
+%load_ext autoreload 
+%autoreload 2
+
+
 Instalar o Python 3.12
 
 python -m venv venv
