@@ -13,5 +13,6 @@ def sumarizar_por_partido(deputados) -> pd.DataFrame:
                 .groupby('siglaPartido')
                 .size()
                 .sort_values(ascending=False)
+                .reset_index()
             )
     return sumarizado

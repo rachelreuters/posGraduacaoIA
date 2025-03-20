@@ -1,0 +1,5 @@
+pycaret[models,mlops]
+kedro-datasets[pandas]
+notebook
+pyarrow
+ipython>=8.10

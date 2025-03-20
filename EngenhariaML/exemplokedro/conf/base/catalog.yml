@@ -3,6 +3,6 @@ deputados:
   filepath: data/02_intermediate/deputados.csv
 
 sumarizado:
-  type: pandas.CSVDataset
-  filepath: data/08_reporting/sumarizado.csv
+  type: pandas.ParquetDataset
+  filepath: data/08_reporting/sumarizado.parquet
 
