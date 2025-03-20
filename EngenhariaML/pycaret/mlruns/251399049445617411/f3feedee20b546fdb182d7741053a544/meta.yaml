@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/belch/Documents/CursoIA/repo/posGraduacaoIA/EngenhariaML/pycaret/mlruns/251399049445617411/f3feedee20b546fdb182d7741053a544/artifacts
+end_time: 1742496244399
+entry_point_name: ''
+experiment_id: '251399049445617411'
+lifecycle_stage: active
+run_id: f3feedee20b546fdb182d7741053a544
+run_name: Gradient Boosting Classifier
+run_uuid: f3feedee20b546fdb182d7741053a544
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742496244088
+status: 3
+tags: []
+user_id: belch

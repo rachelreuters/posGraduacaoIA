@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/belch/Documents/CursoIA/repo/posGraduacaoIA/EngenhariaML/pycaret/mlruns/251399049445617411/040eb097899141e98fa50055facc0d07/artifacts
+end_time: 1742496245379
+entry_point_name: ''
+experiment_id: '251399049445617411'
+lifecycle_stage: active
+run_id: 040eb097899141e98fa50055facc0d07
+run_name: Linear Discriminant Analysis
+run_uuid: 040eb097899141e98fa50055facc0d07
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742496245241
+status: 3
+tags: []
+user_id: belch

@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/belch/Documents/CursoIA/repo/posGraduacaoIA/EngenhariaML/pycaret/mlruns/251399049445617411/34374a747c60451881de0233eef15eaa/artifacts
+end_time: 1742496247925
+entry_point_name: ''
+experiment_id: '251399049445617411'
+lifecycle_stage: active
+run_id: 34374a747c60451881de0233eef15eaa
+run_name: Quadratic Discriminant Analysis
+run_uuid: 34374a747c60451881de0233eef15eaa
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742496247800
+status: 3
+tags: []
+user_id: belch
