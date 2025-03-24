@@ -1,0 +1,6 @@
+ipython>=8.10
+jupyterlab>=3.0
+kedro~=0.19.12
+notebook
+pycaret==3.3.2
+mlflow==2.15.0

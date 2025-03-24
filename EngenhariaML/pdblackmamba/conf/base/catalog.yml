@@ -1,0 +1,23 @@
+# Here you can define all your datasets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+raw_dev:
+  type: pandas.ParquetDataset
+  filepath: data/01_raw/dataset_kobe_dev.parquet
+
+raw_prod:
+  type: pandas.ParquetDataset
+  filepath: data/01_raw/dataset_kobe_prod.parquet
+
+dev_filtered:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/data_filtered.parquet
+
+dev_train:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/base_train.parquet
+  
+dev_test:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/base_test.parquet
