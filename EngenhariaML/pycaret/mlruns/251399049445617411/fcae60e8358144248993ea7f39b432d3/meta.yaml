@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/belch/Documents/CursoIA/repo/posGraduacaoIA/EngenhariaML/pycaret/mlruns/251399049445617411/fcae60e8358144248993ea7f39b432d3/artifacts
+end_time: 1742860586291
+entry_point_name: ''
+experiment_id: '251399049445617411'
+lifecycle_stage: active
+run_id: fcae60e8358144248993ea7f39b432d3
+run_name: Ada Boost Classifier
+run_uuid: fcae60e8358144248993ea7f39b432d3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742860586163
+status: 3
+tags: []
+user_id: belch

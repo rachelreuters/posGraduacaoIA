@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/belch/Documents/CursoIA/repo/posGraduacaoIA/EngenhariaML/pycaret/mlruns/251399049445617411/60d7532c270a485dac9ded476e75379b/artifacts
+end_time: 1742860587878
+entry_point_name: ''
+experiment_id: '251399049445617411'
+lifecycle_stage: active
+run_id: 60d7532c270a485dac9ded476e75379b
+run_name: K Neighbors Classifier
+run_uuid: 60d7532c270a485dac9ded476e75379b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742860587736
+status: 3
+tags: []
+user_id: belch

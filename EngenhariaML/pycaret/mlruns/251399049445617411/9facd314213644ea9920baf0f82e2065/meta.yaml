@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/belch/Documents/CursoIA/repo/posGraduacaoIA/EngenhariaML/pycaret/mlruns/251399049445617411/9facd314213644ea9920baf0f82e2065/artifacts
+end_time: 1742860589754
+entry_point_name: ''
+experiment_id: '251399049445617411'
+lifecycle_stage: active
+run_id: 9facd314213644ea9920baf0f82e2065
+run_name: Logistic Regression
+run_uuid: 9facd314213644ea9920baf0f82e2065
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742860589447
+status: 3
+tags: []
+user_id: belch

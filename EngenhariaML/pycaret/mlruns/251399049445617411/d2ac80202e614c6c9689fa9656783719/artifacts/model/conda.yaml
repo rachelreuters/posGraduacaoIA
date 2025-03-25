@@ -1,0 +1,8 @@
+channels:
+- conda-forge
+dependencies:
+- pip<=25.0
+- pip:
+  - mlflow==2.15.0
+  - pycaret==3.3.2
+name: titanic-env

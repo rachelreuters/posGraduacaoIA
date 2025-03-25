@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/belch/Documents/CursoIA/repo/posGraduacaoIA/EngenhariaML/pycaret/mlruns/251399049445617411/373a297b6711407f9c531fa4904997dd/artifacts
+end_time: 1742860586557
+entry_point_name: ''
+experiment_id: '251399049445617411'
+lifecycle_stage: active
+run_id: 373a297b6711407f9c531fa4904997dd
+run_name: Light Gradient Boosting Machine
+run_uuid: 373a297b6711407f9c531fa4904997dd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742860586408
+status: 3
+tags: []
+user_id: belch

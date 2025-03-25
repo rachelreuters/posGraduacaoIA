@@ -21,3 +21,16 @@ dev_train:
 dev_test:
   type: pandas.ParquetDataset
   filepath: data/05_model_input/base_test.parquet
+
+
+regLog_model:
+    type: kedro_mlflow.io.models.MlflowModelLocalFileSystemDataset
+    flavor: mlflow.sklearn
+    filepath: data/06_models/regLog_model
+    version: 0.19.12
+        
+decisionTree_model:
+    type: kedro_mlflow.io.models.MlflowModelLocalFileSystemDataset
+    flavor: mlflow.sklearn
+    filepath: data/06_models/decisionTree_model
+    version: 0.19.12

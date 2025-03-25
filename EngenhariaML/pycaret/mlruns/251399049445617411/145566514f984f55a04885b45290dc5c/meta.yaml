@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/belch/Documents/CursoIA/repo/posGraduacaoIA/EngenhariaML/pycaret/mlruns/251399049445617411/145566514f984f55a04885b45290dc5c/artifacts
+end_time: 1742860588400
+entry_point_name: ''
+experiment_id: '251399049445617411'
+lifecycle_stage: active
+run_id: 145566514f984f55a04885b45290dc5c
+run_name: Dummy Classifier
+run_uuid: 145566514f984f55a04885b45290dc5c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742860588271
+status: 3
+tags: []
+user_id: belch

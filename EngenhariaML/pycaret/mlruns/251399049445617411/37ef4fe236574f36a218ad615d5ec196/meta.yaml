@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/belch/Documents/CursoIA/repo/posGraduacaoIA/EngenhariaML/pycaret/mlruns/251399049445617411/37ef4fe236574f36a218ad615d5ec196/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '251399049445617411'
+lifecycle_stage: active
+run_id: 37ef4fe236574f36a218ad615d5ec196
+run_name: Session Initialized 24a9
+run_uuid: 37ef4fe236574f36a218ad615d5ec196
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742860562821
+status: 1
+tags: []
+user_id: belch

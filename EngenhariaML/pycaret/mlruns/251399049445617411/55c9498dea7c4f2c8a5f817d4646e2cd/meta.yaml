@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/belch/Documents/CursoIA/repo/posGraduacaoIA/EngenhariaML/pycaret/mlruns/251399049445617411/55c9498dea7c4f2c8a5f817d4646e2cd/artifacts
+end_time: 1742860588156
+entry_point_name: ''
+experiment_id: '251399049445617411'
+lifecycle_stage: active
+run_id: 55c9498dea7c4f2c8a5f817d4646e2cd
+run_name: SVM - Linear Kernel
+run_uuid: 55c9498dea7c4f2c8a5f817d4646e2cd
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742860587999
+status: 3
+tags: []
+user_id: belch

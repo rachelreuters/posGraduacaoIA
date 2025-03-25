@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/belch/Documents/CursoIA/repo/posGraduacaoIA/EngenhariaML/pycaret/mlruns/251399049445617411/b7307dd5b7bc44dc9099f4f61f424eff/artifacts
+end_time: 1742860587615
+entry_point_name: ''
+experiment_id: '251399049445617411'
+lifecycle_stage: active
+run_id: b7307dd5b7bc44dc9099f4f61f424eff
+run_name: Extra Trees Classifier
+run_uuid: b7307dd5b7bc44dc9099f4f61f424eff
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742860587460
+status: 3
+tags: []
+user_id: belch

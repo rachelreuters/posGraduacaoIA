@@ -4,3 +4,5 @@ kedro~=0.19.12
 notebook
 pycaret==3.3.2
 mlflow==2.15.0
+kedro-mlflow==0.14.4
+kedro-viz==11.0.0

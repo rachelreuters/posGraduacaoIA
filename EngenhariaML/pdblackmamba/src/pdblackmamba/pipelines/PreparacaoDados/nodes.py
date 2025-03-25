@@ -6,7 +6,6 @@ from sklearn.model_selection import train_test_split
 import mlflow
 
 logger = logging.getLogger(__name__)
-mlflow.set_experiment("Black Mamba Experiment")
 
 def download_raw_dev() -> pd.DataFrame:
     resp = requests.get("https://github.com/tciodaro/eng_ml/blob/main/data/dataset_kobe_dev.parquet?raw=true")
@@ -39,7 +38,8 @@ Por outro lado, treinar com poucos dados pode causar underfitting, já que o mod
 Viés e Variância:
 Um conjunto de treino ou teste mal balanceado (como uma classe com mais exemplos que outras) pode induzir viés nos resultados.'
 '''
-def split_train_test(data: pd.DataFrame):
+def split_train_test(data: pd.DataFrame, mlflowExperiment: str):
+    mlflow.set_experiment(mlflowExperiment)
     y = data[['shot_made_flag']]
     data_train, data_test =  train_test_split(data, test_size=0.2, stratify=y, random_state=22)
     mlflow.log_param("percent_test", 20)
