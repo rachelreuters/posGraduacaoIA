@@ -7,26 +7,26 @@ def create_pipeline(**kwargs) -> Pipeline:
     return pipeline(
         [
             node(
-                func=nodes.model_train_regLog,
-                inputs=["dev_train","params:mlflow_experiment"],
+                func=nodes.model_train,
+                inputs=["dev_train","params:model_regLog","params:mlflow_experiment"],
                 outputs="regLog_model",
             ),
             node(
-                func=nodes.model_train_decisionTree,
-                inputs=["dev_train","params:mlflow_experiment"],
+                func=nodes.model_train,
+                inputs=["dev_train","params:model_dt","params:mlflow_experiment"],
                 outputs="decisionTree_model",
             ),
             node(
-                func=nodes.log_loss_regLog,
-                inputs=["regLog_model","dev_train", "dev_test"],
+                func=nodes.get_metrics,
+                inputs=["regLog_model","dev_train", "dev_test", "params:model_regLog"],
                 outputs=None,
-                tags=['log_loss']
+                tags=['metrics']
             ),
             node(
-                func=nodes.log_loss_decisionTree,
-                inputs=["decisionTree_model","dev_train", "dev_test"],
+                func=nodes.get_metrics,
+                inputs=["decisionTree_model","dev_train", "dev_test","params:model_dt" ],
                 outputs=None,
-                tags=['log_loss']
+                tags=['metrics']
             )
         ]
     )

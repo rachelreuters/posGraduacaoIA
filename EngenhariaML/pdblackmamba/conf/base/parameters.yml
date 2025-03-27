@@ -1,1 +1,3 @@
 mlflow_experiment : "pdblackmamba"
+model_regLog : "lr"
+model_dt : "dt"

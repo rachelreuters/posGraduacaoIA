@@ -34,3 +34,7 @@ decisionTree_model:
     flavor: mlflow.sklearn
     filepath: data/06_models/decisionTree_model
     version: 0.19.12
+
+metric_prod:
+    type: pandas.ParquetDataset
+    filepath: data/07_model_output/metric_prod.parquet
