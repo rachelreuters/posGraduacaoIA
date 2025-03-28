@@ -9,7 +9,7 @@ def create_pipeline(**kwargs) -> Pipeline:
             node(
                 func=nodes.model_prod,
                 inputs=["raw_prod","regLog_model"],
-                outputs="metric_prod",
+                outputs="predict_prod_pickle",
             ),
         ]
     )

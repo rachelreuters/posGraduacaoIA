@@ -25,7 +25,7 @@ def model_prod(data: pd.DataFrame, model) -> pd.DataFrame:
 
     result_df = pd.concat([X_test, predictions_df], axis=1)
 
-    mlflow.set_tag("mlflow.runName", "metrics_prod")
+    mlflow.set_tag("mlflow.runName", "metrics_prod_pickle")
 
     mlflow.log_metric(f"log_loss", log_loss_value)
     mlflow.log_metric(f"f1_score", f1_value)
