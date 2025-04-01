@@ -73,7 +73,7 @@ def generate_roc_plot( Y_test, y_pred_prob ):
 
     plt.figure(figsize=(8, 6))
     plt.plot(fpr, tpr, color="blue", label=f"ROC Curve (AUC = {auc_score:.2f})")
-    plt.plot([0, 1], [0, 1], color="gray", linestyle="--")  # Diagonal line
+    plt.plot([0, 1], [0, 1], color="gray", linestyle="--") 
     plt.xlabel("False Positive Rate (FPR)")
     plt.ylabel("True Positive Rate (TPR)")
     plt.title("Receiver Operating Characteristic (ROC) Curve")
@@ -89,34 +89,4 @@ def generate_roc_plot( Y_test, y_pred_prob ):
     mlflow.log_artifact(fullpath, artifact_path="Plots")
    
 
-def feature_importance_plot(X_test):
-
-    feature_names = ['lat','lon','minutes_remaining','period','playoffs','shot_distance']
-
-    model_uri = "models:/kobe_lr_model_prod/latest"  # Replace with model name and version
-
-    # Load the model
-    model = mlflow.sklearn.load_model(model_uri)
-
-    coefficients = model.coef_[0]  
-    feature_importance = pd.DataFrame({
-        "Feature": feature_names,
-        "Importance": coefficients
-    })
-    feature_importance["Absolute Importance"] = np.abs(feature_importance["Importance"])
-    feature_importance = feature_importance.sort_values(by="Absolute Importance", ascending=False)
-
-    # Display feature importance
-    print(feature_importance)
-
-    plt.barh(y=feature_names, width=feature_importance['Importance'].values)
-
-    current_path = os.getcwd()
-    fullpath=current_path + "/data/08_reporting/feature_importance_prod_server.png"
-
-    plt.savefig(fullpath, dpi=300, bbox_inches="tight")
-
-    mlflow.set_tag("mlflow.runName", "metrics_prod_server")
-    
-    mlflow.log_artifact(fullpath, artifact_path="Plots")
 

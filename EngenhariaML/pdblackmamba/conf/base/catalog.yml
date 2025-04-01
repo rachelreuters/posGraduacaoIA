@@ -55,6 +55,14 @@ predict_prod_server:
     type: pandas.ParquetDataset
     filepath: data/07_model_output/predict_prod_server.parquet
 
+y_pred_prob_dev_test:
+    type: pickle.PickleDataset
+    filepath: data/07_model_output/y_pred_prob_dev_test.pkl
+
+y_pred_dev_test:
+    type: pickle.PickleDataset
+    filepath: data/07_model_output/y_pred_dev_test.pkl
+
 X_prod:
     type: pickle.PickleDataset
     filepath: data/07_model_output/x_prod.pkl

@@ -20,13 +20,25 @@ def create_pipeline(**kwargs) -> Pipeline:
                 func=nodes.get_metrics,
                 inputs=["regLog_model","dev_train", "dev_test", "params:model_regLog"],
                 outputs=None,
-                tags=['metrics']
+                tags=['metrics_train_model']
             ),
             node(
                 func=nodes.get_metrics,
                 inputs=["decisionTree_model","dev_train", "dev_test","params:model_dt" ],
                 outputs=None,
-                tags=['metrics']
+                tags=['metrics_train_model']
+            ),
+            node(
+                func=nodes.feature_importance_plot,
+                inputs=["regLog_model", "params:model_regLog"],
+                outputs=None,
+                tags=['metrics_train_model'],            
+            ),
+            node(
+                func=nodes.feature_importance_plot,
+                inputs=["decisionTree_model", "params:model_dt"],
+                outputs=None,
+                tags=['metrics_train_model'],            
             )
         ]
     )

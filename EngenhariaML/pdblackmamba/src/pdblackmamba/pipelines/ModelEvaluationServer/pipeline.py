@@ -31,12 +31,6 @@ def create_pipeline(**kwargs) -> Pipeline:
                 outputs=None,
                 tags=["prod_analysis"]
             ),
-            node(
-                func=nodes.feature_importance_plot,
-                inputs=["X_prod"],
-                outputs=None,
-                tags=["prod_analysis"]
-            ),
             
         ]
     )
