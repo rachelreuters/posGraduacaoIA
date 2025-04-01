@@ -1,3 +1,5 @@
 mlflow_experiment : "pdblackmamba"
 model_regLog : "lr"
 model_dt : "dt"
+file_name_train_prefix: "train"
+file_name_test_prefix: "test"

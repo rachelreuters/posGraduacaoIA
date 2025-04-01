@@ -74,3 +74,21 @@ def plot_train_test_balance(trainData: pd.DataFrame, testData: pd.DataFrame):
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
     plt.close()  
+
+def plot_distribution(data: pd.DataFrame, file_name ):
+
+    input_columns = ['lat','lon','minutes_remaining','period','playoffs','shot_distance']
+
+    plt.figure(figsize=(40, 20))
+
+    for index, value in enumerate(input_columns):
+        plt.subplot(4, 3,index+1)
+        seaborn.histplot(data[value])
+        plt.xlabel(input_columns[index])
+        plt.tight_layout()
+
+    current_path = os.getcwd()
+    fullpath=current_path + f"/data/08_reporting/{file_name}_distribution.png"
+
+    plt.savefig(fullpath, dpi=300, bbox_inches="tight")
+    plt.close()  

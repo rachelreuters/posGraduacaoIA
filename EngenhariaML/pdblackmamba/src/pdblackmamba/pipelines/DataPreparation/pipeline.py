@@ -29,7 +29,20 @@ def create_pipeline(**kwargs) -> Pipeline:
             node (
                 func=nodes.plot_train_test_balance,
                 inputs=["dev_train", "dev_test"],
-                outputs=None
+                outputs=None,
+                tags=["plots_train"]
+            ),
+            node(
+                func=nodes.plot_distribution,
+                inputs=["dev_train", "params:file_name_train_prefix"],
+                outputs=None,
+                tags=["plots_train"]
+            ),
+            node(
+                func=nodes.plot_distribution,
+                inputs=["dev_test", "params:file_name_test_prefix"],
+                outputs=None,
+                tags=["plots_train"]
             )
         ]
     )
