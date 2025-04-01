@@ -4,6 +4,9 @@ from io import BytesIO
 import logging
 from sklearn.model_selection import train_test_split
 import mlflow
+import matplotlib.pyplot as plt
+import seaborn 
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -51,3 +54,23 @@ def split_train_test(data: pd.DataFrame, mlflowExperiment: str):
 
     return data_train, data_test
 
+
+def plot_train_test_balance(trainData: pd.DataFrame, testData: pd.DataFrame):
+
+    new_labels = ['Not Shot', 'Shot']
+    fig, axes = plt.subplots(1, 2, figsize=(20, 10))  
+    seaborn.countplot(x=trainData["shot_made_flag"], ax=axes[0])
+    axes[0].set_xticklabels(new_labels)
+    axes[0].set_title("Train Data")
+
+    seaborn.countplot(x=testData["shot_made_flag"], ax=axes[1])
+    axes[1].set_xticklabels(new_labels)
+    axes[1].set_title("Test Data")
+
+    plt.tight_layout()
+
+    current_path = os.getcwd()
+    fullpath=current_path + "/data/08_reporting/dev_train_test_balance.png"
+
+    plt.savefig(fullpath, dpi=300, bbox_inches="tight")
+    plt.close()  

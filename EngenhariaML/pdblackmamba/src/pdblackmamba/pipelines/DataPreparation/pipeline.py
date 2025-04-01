@@ -25,6 +25,11 @@ def create_pipeline(**kwargs) -> Pipeline:
                 func=nodes.split_train_test,
                 inputs=["dev_filtered", "params:mlflow_experiment"],
                 outputs=["dev_train", "dev_test"],
+            ),
+            node (
+                func=nodes.plot_train_test_balance,
+                inputs=["dev_train", "dev_test"],
+                outputs=None
             )
         ]
     )
