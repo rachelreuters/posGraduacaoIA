@@ -10,7 +10,7 @@ from .pipelines.ModelEvaluationServer import create_pipeline as model_evaluation
 
 def register_pipelines() -> dict[str, Pipeline]:
 
-    combined_pipeline =  model_train()
+    combined_pipeline =  data_preparation()
 
     return {
         "__default__": combined_pipeline,

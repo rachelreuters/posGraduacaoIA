@@ -92,3 +92,15 @@ def plot_distribution(data: pd.DataFrame, file_name ):
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
     plt.close()  
+
+def plot_correlation(data: pd.DataFrame, file_name ):
+    corr_matrix = data.corr()
+
+    plt.figure(figsize=(8, 6))
+    seaborn.heatmap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
+    plt.title("Heatmap de Correlação")
+    current_path = os.getcwd()
+    fullpath=current_path + f"/data/08_reporting/dev_{file_name}_correlation.png"
+
+    plt.savefig(fullpath, dpi=300, bbox_inches="tight")
+    plt.close()  
