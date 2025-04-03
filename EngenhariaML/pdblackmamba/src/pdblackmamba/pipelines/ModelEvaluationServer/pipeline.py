@@ -24,13 +24,17 @@ def create_pipeline(**kwargs) -> Pipeline:
                 outputs="predict_prod_server",
                 tags=["prod_analysis"]
             ),
-
             node(
                 func=nodes.generate_roc_plot,
                 inputs=["Y_prod","y_prod_pred_prob"],
                 outputs=None,
                 tags=["prod_analysis"]
             ),
-            
+            node(
+                func=nodes.lat_lon_plot_model_success,
+                inputs=["Y_prod","y_prod_pred","X_prod" ],
+                outputs=None,
+                tags=["prod_analysis"]
+            )
         ]
     )

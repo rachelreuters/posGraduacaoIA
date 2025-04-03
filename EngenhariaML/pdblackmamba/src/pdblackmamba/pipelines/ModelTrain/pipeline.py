@@ -39,6 +39,18 @@ def create_pipeline(**kwargs) -> Pipeline:
                 inputs=["decisionTree_model", "params:model_dt"],
                 outputs=None,
                 tags=['metrics_train_model'],            
+            ),
+            node(
+                func=nodes.lat_lon_plot_model_success,
+                inputs=["regLog_model","dev_test","params:model_regLog"],
+                outputs=None,
+                tags=['metrics_train_model'],       
+            ),
+            node(
+                func=nodes.lat_lon_plot_model_success,
+                inputs=["decisionTree_model","dev_test","params:model_dt"],
+                outputs=None,
+                tags=['metrics_train_model'],       
             )
         ]
     )

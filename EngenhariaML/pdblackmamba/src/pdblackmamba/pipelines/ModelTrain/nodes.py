@@ -6,10 +6,9 @@ import mlflow
 import matplotlib.pyplot as plt
 import os
 import numpy as np
+import matplotlib.image as mpimg
 
 logger = logging.getLogger(__name__)
-
-
 
 def model_train(data: pd.DataFrame,type_model,  mlflowExperiment: str):
     exp = ClassificationExperiment()
@@ -48,8 +47,6 @@ def get_metrics(model, dev_train, dev_test, model_type):
     Y_train = dev_train[['shot_made_flag']]
     Y_test = dev_test[['shot_made_flag']]
 
-    model.fit(X_train, Y_train)
-
     y_pred_prob = model.predict_proba(X_test)
     y_pred = model.predict(X_test)
 
@@ -75,13 +72,46 @@ def get_metrics(model, dev_train, dev_test, model_type):
     plt.legend()
     plt.grid()
     current_path = os.getcwd()
-    fullpath=current_path + f"/data/08_reporting/dev_roc_{model_type}.png"
+    fullpath=current_path + f"/data/08_reporting/model_train_report/dev_roc_{model_type}.png"
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
     plt.close()  
     mlflow.set_tag("mlflow.runName", "metrics_dev")
     
     mlflow.log_artifact(fullpath, artifact_path="Plots")
+
+
+def lat_lon_plot_model_success(model, data: pd.DataFrame, model_type):
+    X_test = data[['lat','lon','minutes_remaining','period','playoffs','shot_distance']]
+    Y_test = data['shot_made_flag']
+   
+    y_pred = model.predict(X_test)
+
+    lat= data['lat']
+    lon= data['lon']
+    color = ["green" if shot == y_pred[index] else "red" for index, shot in enumerate(Y_test)]
+
+    fig, ax = plt.subplots(figsize=(10, 7))
+
+    current_path = os.getcwd()
+
+    plt.legend(loc="upper left", bbox_to_anchor=(1, 1)) 
+
+    image = mpimg.imread(current_path+"/streamlit/lakers.gif")
+
+    ax.imshow(image, extent=[-118.54, -118 ,33.2, 34.2], aspect='auto', alpha=0.9,zorder=9)    
+
+    ax.scatter(lon, lat,s=80, c=color,marker='x' ,alpha=1, label='Arremesso',zorder=10, linewidths=2)
+    plt.ticklabel_format(style="plain", axis="both",useOffset=False)
+    plt.title('Arremesso na quadra', fontsize=15)
+    plt.xlabel('Lon')
+    plt.ylabel('Lat')
+   
+    fullpath=current_path + f"/data/08_reporting/model_train_report/dev_{model_type}_lat_lon_shot_model_test.png"
+
+    plt.savefig(fullpath, dpi=300, bbox_inches="tight")
+    plt.close()  
+
 
 
 def feature_importance_plot(model, model_type):
@@ -99,13 +129,16 @@ def feature_importance_plot(model, model_type):
     plt.barh(y=feature_names, width=feature_importance['Importance'].values)
 
     current_path = os.getcwd()
-    fullpath=current_path + f"/data/08_reporting/dev_model_feature_importance_{model_type}.png"
+    fullpath=current_path + f"/data/08_reporting/model_train_report/dev_model_feature_importance_{model_type}.png"
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
 
     mlflow.set_tag("mlflow.runName", "metrics_dev")
     
     mlflow.log_artifact(fullpath, artifact_path="Plots")
+
+
+
 
 
     

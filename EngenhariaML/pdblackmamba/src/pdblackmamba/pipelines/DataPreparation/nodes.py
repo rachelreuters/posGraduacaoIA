@@ -1,3 +1,4 @@
+from matplotlib.patches import Rectangle
 import pandas as pd
 import requests
 from io import BytesIO
@@ -7,6 +8,8 @@ import mlflow
 import matplotlib.pyplot as plt
 import seaborn 
 import os
+import matplotlib.image as mpimg
+
 
 logger = logging.getLogger(__name__)
 
@@ -70,7 +73,7 @@ def plot_train_test_balance(trainData: pd.DataFrame, testData: pd.DataFrame):
     plt.tight_layout()
 
     current_path = os.getcwd()
-    fullpath=current_path + "/data/08_reporting/dev_train_test_balance.png"
+    fullpath=current_path + "/data/08_reporting/data_input_analysis/dev_train_test_balance.png"
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
     plt.close()  
@@ -88,7 +91,7 @@ def plot_distribution(data: pd.DataFrame, file_name ):
         plt.tight_layout()
 
     current_path = os.getcwd()
-    fullpath=current_path + f"/data/08_reporting/dev_{file_name}_distribution.png"
+    fullpath=current_path + f"/data/08_reporting/data_input_analysis/dev_{file_name}_distribution.png"
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
     plt.close()  
@@ -100,7 +103,38 @@ def plot_correlation(data: pd.DataFrame, file_name ):
     seaborn.heatmap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
     plt.title("Heatmap de Correlação")
     current_path = os.getcwd()
-    fullpath=current_path + f"/data/08_reporting/dev_{file_name}_correlation.png"
+    fullpath=current_path + f"/data/08_reporting/data_input_analysis/dev_{file_name}_correlation.png"
+
+    plt.savefig(fullpath, dpi=300, bbox_inches="tight")
+    plt.close()  
+
+
+def plot_shot_areas(data: pd.DataFrame, file_name):
+
+    lat= data['lat']
+    lon= data['lon']
+    shots = data['shot_made_flag']
+
+    color = ["green" if shot == 1 else "red" for shot in shots]
+
+    fig, ax = plt.subplots(figsize=(10, 7))
+
+    current_path = os.getcwd()
+
+    plt.legend(loc="upper left", bbox_to_anchor=(1, 1)) 
+
+    image = mpimg.imread(current_path+"/streamlit/lakers.gif")
+
+    ax.imshow(image, extent=[-118.54, -118 ,33.2, 34.2], aspect='auto', alpha=0.9,zorder=9)  
+
+
+    ax.scatter(lon, lat,s=80, c=color,marker='x' ,alpha=1, label='Arremesso',zorder=10, linewidths=2)
+    plt.ticklabel_format(style="plain", axis="both",useOffset=False)
+    plt.title('Arremesso na quadra', fontsize=15)
+    plt.xlabel('Lon')
+    plt.ylabel('Lat')
+   
+    fullpath=current_path + f"/data/08_reporting/data_input_analysis/dev_{file_name}_lat_lon_shot_original.png"
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
     plt.close()  

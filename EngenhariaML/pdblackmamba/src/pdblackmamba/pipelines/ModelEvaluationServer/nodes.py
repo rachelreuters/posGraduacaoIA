@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, roc_auc_score
 import numpy as np
-
+import matplotlib.image as mpimg
 
 def prepare_Y_X_prod(data: pd.DataFrame):
     data_filtered = data.dropna()
@@ -80,7 +80,7 @@ def generate_roc_plot( Y_test, y_pred_prob ):
     plt.legend()
     plt.grid()
     current_path = os.getcwd()
-    fullpath=current_path + "/data/08_reporting/roc_curve_prod_server.png"
+    fullpath=current_path + "/data/08_reporting/model_prod_report/roc_curve_prod_server.png"
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
     plt.close()  
@@ -90,3 +90,29 @@ def generate_roc_plot( Y_test, y_pred_prob ):
    
 
 
+def lat_lon_plot_model_success(Y_test,y_pred, data: pd.DataFrame):
+
+    lat= data['lat']
+    lon= data['lon']
+    color = ["green" if shot == y_pred[index] else "red" for index, shot in enumerate(Y_test.values.ravel())]
+
+    fig, ax = plt.subplots(figsize=(10, 7))
+
+    current_path = os.getcwd()
+
+    plt.legend(loc="upper left", bbox_to_anchor=(1, 1)) 
+
+    image = mpimg.imread(current_path+"/streamlit/lakers.gif")
+
+    ax.imshow(image, extent=[-118.54, -118 ,33.2, 34.2], aspect='auto', alpha=0.9,zorder=9)  
+
+    ax.scatter(lon, lat,s=80, c=color,marker='x' ,alpha=1, label='Arremesso',zorder=10, linewidths=2)
+    plt.ticklabel_format(style="plain", axis="both",useOffset=False)
+    plt.title('Arremesso na quadra', fontsize=15)
+    plt.xlabel('Lon')
+    plt.ylabel('Lat')
+   
+    fullpath=current_path + f"/data/08_reporting/model_prod_report/lat_lon_shot_prod.png"
+
+    plt.savefig(fullpath, dpi=300, bbox_inches="tight")
+    plt.close()  
