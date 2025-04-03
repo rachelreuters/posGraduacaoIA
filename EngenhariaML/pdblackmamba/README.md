@@ -47,7 +47,7 @@ Para gerar as metricas encima dos dados de producao, acessando o modelo servido 
     kedro run --pipeline model_evaluation_server
 
 
-Para acessar o formulário em streamlit para testar o modelo em produção, entrar na pasta do streamlit e executar o comando:
+Para acessar o formulário em streamlit para testar o modelo em produção  e verificar as inferências do modelo, entrar na pasta do streamlit e executar o comando:
 
     streamlit run main.py
 

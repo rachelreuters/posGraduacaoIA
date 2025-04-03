@@ -1,7 +1,8 @@
 import logging
 from pycaret.classification import *
 import pandas as pd
-from sklearn.metrics import log_loss, f1_score, roc_auc_score, roc_curve
+import seaborn
+from sklearn.metrics import classification_report, log_loss, f1_score, roc_auc_score, roc_curve
 import mlflow
 import matplotlib.pyplot as plt
 import os
@@ -18,9 +19,7 @@ def model_train(data: pd.DataFrame,type_model,  mlflowExperiment: str):
               log_experiment='mlflow', 
               experiment_name=mlflowExperiment,
               normalize=True,
-              normalize_method="robust",
-              system_log=False,
-              verbose=False,               
+              normalize_method="robust",           
               )
     
     exp.add_metric(
@@ -32,8 +31,7 @@ def model_train(data: pd.DataFrame,type_model,  mlflowExperiment: str):
 
     model = exp.create_model(type_model)
 
-    tuned = exp.tune_model(model, n_iter= 100, optimize='F1',
-                           verbose= False, tuner_verbose=False)
+    tuned = exp.tune_model(model, n_iter= 2000, optimize='F1', )
 
     exp.get_metrics()
 
@@ -49,6 +47,8 @@ def get_metrics(model, dev_train, dev_test, model_type):
 
     y_pred_prob = model.predict_proba(X_test)
     y_pred = model.predict(X_test)
+
+    performance_teste = classification_report(Y_test, y_pred, output_dict=True)
 
     log_loss_value = log_loss(Y_test, y_pred_prob)
 
@@ -73,6 +73,13 @@ def get_metrics(model, dev_train, dev_test, model_type):
     plt.grid()
     current_path = os.getcwd()
     fullpath=current_path + f"/data/08_reporting/model_train_report/dev_roc_{model_type}.png"
+
+    plt.figure(figsize=(8, 6))
+    seaborn.heatmap(pd.DataFrame(performance_teste).iloc[:-1, :].T, annot=True, cmap="viridis")
+    current_path = os.getcwd()
+    fullpath=current_path + f"/data/08_reporting/model_train_report/{model_type}_metrics.png"
+
+    plt.savefig(fullpath, dpi=300, bbox_inches="tight")
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
     plt.close()  

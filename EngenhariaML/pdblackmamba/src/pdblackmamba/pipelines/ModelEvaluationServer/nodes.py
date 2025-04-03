@@ -1,6 +1,8 @@
 import logging
+from matplotlib.lines import Line2D
 from pycaret.classification import *
 import pandas as pd
+import seaborn
 from sklearn.metrics import classification_report, log_loss
 import mlflow
 import requests
@@ -61,7 +63,13 @@ def generate_main_metrics(X_test, Y_test, y_pred, y_pred_prob ):
     mlflow.log_metric(f"f1_score", f1_value)
     mlflow.log_metric(f"precision_score", precision_value)
     mlflow.log_metric(f"recall_score", recall_value)
-        
+
+    plt.figure(figsize=(8, 6))
+    seaborn.heatmap(pd.DataFrame(performance_teste).iloc[:-1, :].T, annot=True, cmap="viridis")
+    current_path = os.getcwd()
+    fullpath=current_path + "/data/08_reporting/model_prod_report/prod_metrics.png"
+    plt.savefig(fullpath, dpi=300, bbox_inches="tight")
+
     return result_df
 
 
@@ -104,7 +112,16 @@ def lat_lon_plot_model_success(Y_test,y_pred, data: pd.DataFrame):
 
     image = mpimg.imread(current_path+"/streamlit/lakers.gif")
 
-    ax.imshow(image, extent=[-118.54, -118 ,33.2, 34.2], aspect='auto', alpha=0.9,zorder=9)  
+    ax.imshow(image, extent=[-118.54, -118 ,33.2, 34.2], aspect='auto', alpha=0.9,zorder=5)  
+
+    custom_legend = [
+        Line2D([0], [0], marker="x", color="green", markerfacecolor="green", markersize=10, label="Y_raw == Y_predict"),
+        Line2D([0], [0], marker="x", color="red", markerfacecolor="red", markersize=10, label="Y_raw != Y_predict")
+    ]
+
+    # Adicionar legenda ao gráfico
+    plt.legend(handles=custom_legend, loc="lower right", title="Legenda",frameon=True, fancybox=True, framealpha=0.5) 
+
 
     ax.scatter(lon, lat,s=80, c=color,marker='x' ,alpha=1, label='Arremesso',zorder=10, linewidths=2)
     plt.ticklabel_format(style="plain", axis="both",useOffset=False)
@@ -113,6 +130,21 @@ def lat_lon_plot_model_success(Y_test,y_pred, data: pd.DataFrame):
     plt.ylabel('Lat')
    
     fullpath=current_path + f"/data/08_reporting/model_prod_report/lat_lon_shot_prod.png"
+
+    plt.savefig(fullpath, dpi=300, bbox_inches="tight")
+    plt.close()  
+
+def plot_shot_balance(Y_test):
+
+    plt.figure(figsize=(8, 6))
+    new_labels = ['Not Shot', 'Shot']
+    seaborn.countplot(x=Y_test.values.ravel())
+    plt.xticks(ticks=[0,1], labels=new_labels) 
+    plt.title("Production Data")
+    plt.tight_layout()
+
+    current_path = os.getcwd()
+    fullpath=current_path + "/data/08_reporting/model_prod_report/balance_Y_prod.png"
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
     plt.close()  

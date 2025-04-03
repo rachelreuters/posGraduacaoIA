@@ -35,6 +35,13 @@ def create_pipeline(**kwargs) -> Pipeline:
                 inputs=["Y_prod","y_prod_pred","X_prod" ],
                 outputs=None,
                 tags=["prod_analysis"]
+            ),
+            node(
+                func=nodes.plot_shot_balance,
+                inputs=["Y_prod"],
+                outputs=None,
+                tags=["prod_analysis"]
             )
+
         ]
     )
