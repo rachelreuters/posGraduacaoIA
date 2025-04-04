@@ -35,6 +35,11 @@ dev_test:
 #     filepath: data/06_models/decisionTree_model
 #     version: 0.19.12
 
+# predict_prod_pickle:
+#     type: pandas.ParquetDataset
+#     filepath: data/07_model_output/predict_prod_pickle.parquet
+  
+
 regLog_model:
     type: kedro_mlflow.io.models.MlflowModelTrackingDataset
     flavor: mlflow.sklearn
@@ -47,34 +52,23 @@ decisionTree_model:
     save_args:
       registered_model_name: kobe_dt_model
 
-predict_prod_pickle:
-    type: pandas.ParquetDataset
-    filepath: data/07_model_output/predict_prod_pickle.parquet
-  
+
 predict_prod_server:
     type: pandas.ParquetDataset
     filepath: data/07_model_output/predict_prod_server.parquet
 
-y_pred_prob_dev_test:
-    type: pickle.PickleDataset
-    filepath: data/07_model_output/y_pred_prob_dev_test.pkl
-
-y_pred_dev_test:
-    type: pickle.PickleDataset
-    filepath: data/07_model_output/y_pred_dev_test.pkl
-
 X_prod:
     type: pickle.PickleDataset
-    filepath: data/07_model_output/x_prod.pkl
+    filepath: data/05_model_input/x_prod.pkl
 
 Y_prod:
     type: pickle.PickleDataset
-    filepath: data/07_model_output/y_prod.pkl
+    filepath: data/05_model_input/y_prod.pkl
 
-y_prod_pred:
+y_pred_prod:
     type: pickle.PickleDataset
-    filepath: data/07_model_output/y_pred.pkl
+    filepath: data/07_model_output/y_pred_prod.pkl
 
-y_prod_pred_prob:
+y_prob_prod:
     type: pickle.PickleDataset
-    filepath: data/07_model_output/y_pred_prob.pkl
+    filepath: data/07_model_output/y_prob_prod.pkl

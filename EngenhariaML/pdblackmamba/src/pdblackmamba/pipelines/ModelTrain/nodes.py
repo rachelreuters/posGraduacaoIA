@@ -2,7 +2,7 @@ import logging
 from pycaret.classification import *
 import pandas as pd
 import seaborn
-from sklearn.metrics import classification_report, log_loss, f1_score, roc_auc_score, roc_curve
+from sklearn.metrics import classification_report, log_loss,  roc_auc_score, roc_curve
 import mlflow
 import matplotlib.pyplot as plt
 import os
@@ -31,7 +31,7 @@ def model_train(data: pd.DataFrame,type_model,  mlflowExperiment: str):
 
     model = exp.create_model(type_model)
 
-    tuned = exp.tune_model(model, n_iter= 2000, optimize='F1', )
+    tuned = exp.tune_model(model, n_iter= 100, optimize='F1', )
 
     exp.get_metrics()
 
@@ -52,12 +52,12 @@ def get_metrics(model, dev_train, dev_test, model_type):
 
     log_loss_value = log_loss(Y_test, y_pred_prob)
 
-    f1_value = f1_score(Y_test, y_pred)
+    f1_value = performance_teste['macro avg']['f1-score']
 
     mlflow.set_tag("mlflow.runName", "metrics_dev")
 
-    mlflow.log_metric(f"log_loss_{model_type}", log_loss_value)
-    mlflow.log_metric(f"f1_score_{model_type}", f1_value)
+    mlflow.log_metric(f"log_loss_{model_type}_test", log_loss_value)
+    mlflow.log_metric(f"f1_score_{model_type}_test", f1_value)
 
     fpr, tpr, thresholds = roc_curve(Y_test, [c[1] for c in y_pred_prob] )
     auc_score = roc_auc_score(Y_test, [c[1] for c in y_pred_prob])
@@ -82,9 +82,7 @@ def get_metrics(model, dev_train, dev_test, model_type):
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
-    plt.close()  
-    mlflow.set_tag("mlflow.runName", "metrics_dev")
-    
+    plt.close()      
     mlflow.log_artifact(fullpath, artifact_path="Plots")
 
 
