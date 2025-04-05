@@ -124,7 +124,15 @@ Em ambos os casos e importante observar o padrao de comportamento dos resultados
 -Descreva as estratégias reativa e preditiva de retreinamento para o modelo em operação.
 Na abordagem reativa, o modelo é retreinado após detectar problemas em desempenho. É uma estratégia baseada em eventos e depende de sinais específicos que indicam a necessidade de ajuste. Ocorre quando mudanças significativas nos dados são detectadas, como data drift ou concept drift. As vantagens de um modelo reativo é a simplicidade de implementacao e otimizacao de recursos (ja que treina o modelo apenas na necessidade), a principal desvantagem é o atraso entre a degradacao e sua correcao, podendo gerar problemas para os usuarios ou acidentes (dependendo do problema).
 Na estrategia preditiva, o modelo e retreinado de forma programada com base nas analises preditivas que identificam quando o desempenho pode deteriorar (essas analises podem ser por exemplo padroes historicos de performance do modelo ). Vantagens desse metodo incluem períodos de baixa performance e a garantia de maior estabilidade no ambiente produtivo. Como desvantagem ocorre um maior custo computacional e tambem requer um sistema robusto de previsão para determinar intervalos de retreinamento eficientes.
-
+- Streamlit 
+-Inferencia
+Nessa tela o usuario pode realizar um teste utilizando o modelo em producao. 
+![Inputs](docs/source/StreamlitInferenciaInputs.png)
+O resultado da inferencia do modelo pode ser observado logo abaixo, apos o usuario clicar no botao de "Converteu?"
+![Resposta](docs/source/StreamlitInferenciaResposta.png)
+-Analise 
+Nessa tela pode ser visto varios graficos e analises dos dados, do treino do modelo, dos testes e as metricas. 
+![Analises](docs/source/StreamlitAnalises.png)
 
 ## Rubricas:
 
