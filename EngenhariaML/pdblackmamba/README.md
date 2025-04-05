@@ -1,9 +1,20 @@
-**Rachel Reuters - Engenharia de Machine Learning [25E1_3]**
+***Rachel Reuters - Engenharia de Machine Learning [25E1_3]***
 
 Link pra o git:  [posGraduacaoIA/EngenhariaML/pdblackmamba at main · rachelreuters/posGraduacaoIA](https://github.com/rachelreuters/posGraduacaoIA/tree/main/EngenhariaML/pdblackmamba)
 
 
-[TOC]
+- [Introdução](#introdução)
+- [Diagrama](#diagrama)
+- [Estrutua dos arquivos](#estrutua-dos-arquivos)
+- [Descrição dos artefatos](#descrição-dos-artefatos)
+- [Respostas do Projeto de Disciplina e Rubricas explicadas :](#respostas-do-projeto-de-disciplina-e-rubricas-explicadas-)
+  - [PD:](#pd)
+  - [Rubricas:](#rubricas)
+- [HOW TO:](#how-to)
+  - [Requisitos:](#requisitos)
+  - [Comandos:](#comandos)
+
+# Introdução
 
 
 # Diagrama
