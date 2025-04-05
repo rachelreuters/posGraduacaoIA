@@ -8,11 +8,11 @@ Link pra o git:  [posGraduacaoIA/EngenhariaML/pdblackmamba at main · rachelreut
 
 # Diagrama
 
-![Alt Text](docs/source/DiagramaProjeto.png)
+![Diagrama](docs/source/DiagramaProjeto.png)
 
-# Estrutua de arquivos
+# Estrutua dos arquivos
 
-![alt text](docs/source/ArquiteturaPastas.png)
+![Arquivos](docs/source/ArquiteturaPastas.png)
 
 # Descrição dos artefatos
  - 01_raw
@@ -39,32 +39,32 @@ Link pra o git:  [posGraduacaoIA/EngenhariaML/pdblackmamba at main · rachelreut
      - dev_train_lat_lon_shot_original.png: Plot da latitude e longitude com o shot_made_flag (Y) do grupo de treino do dataset de dev.
      - dev_train_test_balance.png: Balanceamento do Y (shot_made_flag) comparando os dados de trein e teste do dataset de dev. 
    - model_prod_report
-     - balance_Y_prod.png
-     - lat_lon_shot_prod.png
-     - prod_metrics.png
+     - balance_Y_prod.png: Balanceamento do Y para o dataset de producao
+     - lat_lon_shot_prod.png: Plot da latitude e longitude X modelo acertou ou errou
+     - prod_metrics.png: Metricas do modelo com os dados de producao.
      - roc_curve_prod_server.png
    - model_train_report
-     - dev_dt_lat_lon_shot_model_test.png
-     - dev_lr_lat_lon_shot_model_test.png
-     - dev_model_feature_importance_dt.png
-     - dev_model_feature_importance_lr.png
-     - dev_roc_dt.png
-     - dev_roc_lr.png
-     - dt_metrics.png
-     - lr_metrics.png
+     - dev_dt_lat_lon_shot_model_test.png : Plot da latitude e longitude X modelo acertou ou errou para o grupo de teste (modelo de arvore de decisao)
+     - dev_lr_lat_lon_shot_model_test.png : Plot da latitude e longitude X modelo acertou ou errou para o grupo de teste (modelo de regressao logistica)
+     - dev_model_feature_importance_dt.png : Importancia de features para o modelo de arvore de decisao 
+     - dev_model_feature_importance_lr.png: Importancia de features para o modelo de regressao logistica
+     - dev_roc_dt.png: Curva roc para o modelo de arvore de decisao no grupo de teste.
+     - dev_roc_lr.png: Curva roc para o modelo de regressao logistica no grupo de teste.
+     - dt_metrics.png: Metricas finais para o modelo de arvore de decisao.
+     - lr_metrics.png: Metricas finais para o modelo de regressao logistica.
  - Metricas no MLFLOW:
    - metrics_prod_server
-     - f1_score
-     - log_loss
-     - precision_score
-     - recall_score
+     - f1_score: f1_score no modelo para o dataset de producao
+     - log_loss: log_loss no modelo para o dataset de producao
+     - precision_score: Precisao no modelo para o dataset de producao
+     - recall_score: Recall no modelo para o dataset de producao
    - metrics_dev
-     - f1_score_dt_test
-     - f1_score_lr_test
-     - log_loss_dt_test
-     - log_loss_lr_test
-     - test_size
-     - train_size
+     - f1_score_dt_test: f1 score para a arvore de decisao para o grupo de teste
+     - f1_score_lr_test: f1 score para a regressao logistica para o grupo de teste
+     - log_loss_dt_test: log_loss para a arvore de decisao para o grupo de teste
+     - log_loss_lr_test: log_loss para a regressao logistica para o grupo de teste
+     - test_size: tamanho do dataset de teste depois de dividir em treino e teste (80/20)
+     - train_size: tamanho do dataset de treino depois de dividir em treino e teste (80/20)
  - Parametros no MLFLOW:
    - file_name_test_prefix
    - file_name_train_prefix
@@ -73,12 +73,26 @@ Link pra o git:  [posGraduacaoIA/EngenhariaML/pdblackmamba at main · rachelreut
    - model_regLog
    - percent_test
  - Pipelines
-   - DataPreparation
-   - ModelEvaluation
-   - ModelTrain
+   - DataPreparation: Essa etapa é responsável por preparar os dados para serem usados para treinar o modelo. Retirar nulos, separar dados de treino e teste, gerar métricas relativas aos dados iniciais. 
+   - ModelEvaluation: Essa etapa é responsável por executar predição do modelo em dados de produção e com isso gerando métricas. 
+   - ModelTrain:  Essa etapa é responsável por realizar treinos dos modelos, comparar modelos, gerar métricas, gerar plots dos relativos testes e treinos. 
+ - Páginas do Streamlit:
+   - main.py: Página inicial para redirecionar para as demais páginas.
+   - Analise.py : Reune todos os resultados e análises dos modelos.
+   - Inferencia.py: Input de dados de formulário para teste do modelo servido em produção pelo MLFlow.
+  
+# Respostas do Projeto de Disciplina e Rubricas explicadas :
+## PD:
+- Como as ferramentas Streamlit, MLFlow, PyCaret e Scikit-Learn auxiliam na construção dos pipelines descritos anteriormente? 
+RESPOSTA
+-  Explique como a escolha de treino e teste afetam o resultado do modelo final. Quais estratégias ajudam a minimizar os efeitos de viés de dados.
+RESPOSTA 
+-Registre os parâmetros (% teste) e métricas (tamanho de cada base) no MlFlow
+![MetricasModeloDev](docs/source/MetricasMlflowDev.png)
+-Implementar o pipeline de treinamento do modelo 
 
-# Rubricas e Perguntas Teóricas :
 
+## Rubricas:
 
 # HOW TO:
 ## Requisitos:
