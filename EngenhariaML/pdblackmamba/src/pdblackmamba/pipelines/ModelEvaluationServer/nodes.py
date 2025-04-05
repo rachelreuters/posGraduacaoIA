@@ -148,3 +148,22 @@ def plot_shot_balance(Y_test):
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
     plt.close()  
+
+
+def plot_distribution(data: pd.DataFrame ):
+
+    input_columns = ['lat','lon','minutes_remaining','period','playoffs','shot_distance']
+
+    plt.figure(figsize=(40, 20))
+
+    for index, value in enumerate(input_columns):
+        plt.subplot(4, 3,index+1)
+        seaborn.histplot(data[value])
+        plt.xlabel(input_columns[index])
+        plt.tight_layout()
+
+    current_path = os.getcwd()
+    fullpath=current_path + f"/data/08_reporting/model_prod_report/prod_data_distribution.png"
+
+    plt.savefig(fullpath, dpi=300, bbox_inches="tight")
+    plt.close()  

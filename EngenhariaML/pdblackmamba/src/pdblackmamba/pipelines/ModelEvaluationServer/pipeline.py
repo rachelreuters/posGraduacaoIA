@@ -41,6 +41,12 @@ def create_pipeline(**kwargs) -> Pipeline:
                 inputs=["Y_prod"],
                 outputs=None,
                 tags=["prod_analysis"]
+            ),
+            node(
+                func=nodes.plot_distribution,
+                inputs=["raw_prod"],
+                outputs=None,
+                tags=["prod_analysis" ]
             )
 
         ]

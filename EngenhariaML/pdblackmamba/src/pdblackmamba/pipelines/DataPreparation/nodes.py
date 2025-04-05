@@ -31,19 +31,7 @@ def filter_raw_dataset(data: pd.DataFrame) -> pd.DataFrame:
     logger.info(f"Dimensoes do dataset filtrado: {filtered.shape} ")
     return filtered
 
-'''
-A separacao dos dados de teste e treino e fundamental e afeta diretamente a capacidade do modelo de generalizar para novos dados
-Representatividade:
-Se os dados de treino não representam bem o problema, o modelo pode aprender de maneira enviesada ou limitada.
-Se o conjunto de teste não é representativo, a avaliação do modelo será imprecisa.
 
-Overfitting e Underfitting:
-Dados de treino muito grandes e teste muito pequenos podem levar a overfitting, pois o modelo será testado em um conjunto limitado de dados.
-Por outro lado, treinar com poucos dados pode causar underfitting, já que o modelo não terá aprendido padrões suficientes.
-
-Viés e Variância:
-Um conjunto de treino ou teste mal balanceado (como uma classe com mais exemplos que outras) pode induzir viés nos resultados.'
-'''
 def split_train_test(data: pd.DataFrame, mlflowExperiment: str):
     mlflow.set_experiment(mlflowExperiment)
     y = data[['shot_made_flag']]
