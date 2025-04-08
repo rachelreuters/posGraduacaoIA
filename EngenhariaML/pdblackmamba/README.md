@@ -15,7 +15,11 @@ Link pra o git:  [posGraduacaoIA/EngenhariaML/pdblackmamba at main · rachelreut
   - [Comandos:](#comandos)
 
 # Introdução
-
+Projeto de Engenharia de Machine Learning aplicado ao esporte, com foco no uso de modelos para prever resultados de partidas de basquete, mais especificamente para avaliar se o famoso Kobe Bryant converteu ou não a cesta. 
+O projeto utiliza o framework **Kedro**, sendo estruturado em pipelines em que cada pipeline contem um grupo de nós.
+A fim de gerenciar o ciclo de vida dos modelo, está sendo utilizado o **MlFlow**, facilitando a organização e rastreamento dos experimentos, o que é crucial para melhorar a reprodutibilidade e escalabilidade dos projetos de Machine Learning.
+Pra realizar um teste de inferência e também exibir um dashboard com as análises do modelo, foi utilizado o **Streamlit**. 
+O repositório organiza os dados de forma estruturada, incluindo artefatos como datasets de treino e teste, e resultados da avaliação do modelo em produção. A abordagem inclui análises estatísticas detalhadas e geração de relatórios sobre a performance do modelo, visando otimizar as previsões no contexto de um servidor de produção.
 
 # Diagrama
 Seguindo as nomenclaturas do Kedro (pipelines e nós): 
@@ -115,27 +119,27 @@ No item de pipeline do Mlflow "Treinamento" foram incluidas as metricas F1 e log
 Os modelos foram registrados no MLFLOW, e como a regressao logistica foi escolhida, esse modelo foi promovido para producao. 
 ![ModelosMlFlow](docs/source/ModelosMlFlow.png)
 Apos essa escolha, esse modelo promovido foi utilizado para servir localmente atraves do MLflow atraves de API.
--  Em seguida, para testar o modelo servido atraves da API, e possivel executar a pipeline *ModelEvaluationServer* (o comando pode ser encontrado no setor HOW TO mais abaixo). Essa pipeline utiliza os dados de producao (dataset_kobe_prod), filtra as colunas e remove os nulos (assim como foi realizado no grupo de dados de dev) para testar o modelo servido atraves de API pelo Mlflow. Os resultados obtivos das metricas foram salvos tanto num arquivo parquet (predict_prod_server.parquet) quanto registrados no MLFLOW, pelo item de pipeline do Mlflow *PipelineAplicacao*. 
+-Em seguida, para testar o modelo servido atraves da API, e possivel executar a pipeline *ModelEvaluationServer* (o comando pode ser encontrado no setor HOW TO mais abaixo). Essa pipeline utiliza os dados de producao (dataset_kobe_prod), filtra as colunas e remove os nulos (assim como foi realizado no grupo de dados de dev) para testar o modelo servido atraves de API pelo Mlflow. Os resultados obtivos das metricas foram salvos tanto num arquivo parquet (predict_prod_server.parquet) quanto registrados no MLFLOW, pelo item de pipeline do Mlflow *PipelineAplicacao*. 
 ![MetricasProdMlflow](docs/source/MetricasProd.png)
--O modelo é aderente a essa nova base? O que mudou entre uma base e outra? Justifique.
+-  O modelo é aderente a essa nova base? O que mudou entre uma base e outra? Justifique.
 Podemos ver que, em produção, a maioria dos arremessos tem uma distância entre 20 e 30, e esses valores quase não são observados no dataset de treino do modelo. Outra coisa é sobre a latitude, que teve maior grau de importância no treinamento do modelo. Enquanto que, nos dados de treino, os valores se concentraram entre 34 e 34.1, os de produção estão concentrados na faixa de 33.8, o que pode ter ocasionado a previsão de todos os dados como sendo 0 (errou a cesta). 
 As imagens a seguir mostram os arremessos de dev e de prod, e podemos observar essa divergência citada acima. (essas análises podem ser vistas no Streamlit).
 ![ArremessosDev](docs/source/ArremessosDadosDev.png)
-![ArremessosProd](docs/source/ArremessosDadosProd.png)
--Descreva como podemos monitorar a saúde do modelo no cenário com e sem a disponibilidade da variável resposta para o modelo em operação.
+![ArremessosProd](docs/source/ArremessosDadosProd.png) 
+-  Descreva como podemos monitorar a saúde do modelo no cenário com e sem a disponibilidade da variável resposta para o modelo em operação.
 Com a disbonibilidade da variavel de resposta, pode utilizar as metricas mais comuns como F1, precisao, recall  (dependendo da figura de merito do problema em questao). Alem disso tem a curva ROC, e matriz de confusao que tambem devem apoiar no monitoramento. 
 Sem a disponibilidade da variavel de resposta, o foco maior seria em observar  distribuicao dos dados, identificacao de outliers, e balanceamento das classes. 
 Em ambos os casos e importante observar o padrao de comportamento dos resultados.   
--Descreva as estratégias reativa e preditiva de retreinamento para o modelo em operação.
+-  Descreva as estratégias reativa e preditiva de retreinamento para o modelo em operação.
 Na abordagem reativa, o modelo é retreinado após detectar problemas em desempenho. É uma estratégia baseada em eventos e depende de sinais específicos que indicam a necessidade de ajuste. Ocorre quando mudanças significativas nos dados são detectadas, como data drift ou concept drift. As vantagens de um modelo reativo é a simplicidade de implementacao e otimizacao de recursos (ja que treina o modelo apenas na necessidade), a principal desvantagem é o atraso entre a degradacao e sua correcao, podendo gerar problemas para os usuarios ou acidentes (dependendo do problema).
 Na estrategia preditiva, o modelo e retreinado de forma programada com base nas analises preditivas que identificam quando o desempenho pode deteriorar (essas analises podem ser por exemplo padroes historicos de performance do modelo ). Vantagens desse metodo incluem períodos de baixa performance e a garantia de maior estabilidade no ambiente produtivo. Como desvantagem ocorre um maior custo computacional e tambem requer um sistema robusto de previsão para determinar intervalos de retreinamento eficientes.
 - Streamlit 
--Inferencia
+  - Inferencia
 Nessa tela o usuario pode realizar um teste utilizando o modelo em producao. 
 ![Inputs](docs/source/StreamlitInferenciaInputs.png)
 O resultado da inferencia do modelo pode ser observado logo abaixo, apos o usuario clicar no botao de "Converteu?"
 ![Resposta](docs/source/StreamlitInferenciaResposta.png)
--Analise 
+  - Analise 
 Nessa tela pode ser visto varios graficos e analises dos dados, do treino do modelo, dos testes e as metricas. 
 ![Analises](docs/source/StreamlitAnalises.png)
 
@@ -218,6 +222,7 @@ Para preparar os dados
     kedro run --pipeline data_preparation
 
 Para treinar o modelo:
+
     kedro run --pipeline model_train         
 
 Apos o treinamento, verificar os plots e metricas resultantes dos treinamentos. Utilizando o mlflow :
