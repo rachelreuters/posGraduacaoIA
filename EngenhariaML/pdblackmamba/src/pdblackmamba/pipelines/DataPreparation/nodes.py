@@ -32,17 +32,15 @@ def filter_raw_dataset(data: pd.DataFrame) -> pd.DataFrame:
     return filtered
 
 
-def split_train_test(data: pd.DataFrame, mlflowExperiment: str):
-    mlflow.set_experiment(mlflowExperiment)
+def split_train_test(data: pd.DataFrame):
     y = data[['shot_made_flag']]
     data_train, data_test =  train_test_split(data, test_size=0.2, stratify=y, random_state=22)
-    mlflow.set_tag("mlflow.runName", "metrics_dev")
+    mlflow.set_tag("mlflow.runName", "PreparacaoDados")
     mlflow.log_param("percent_test", 20)
     train_size = len(data_train)
     test_size_actual = len(data_test)
     mlflow.log_metric("train_size", train_size)
     mlflow.log_metric("test_size", test_size_actual)
-
     return data_train, data_test
 
 

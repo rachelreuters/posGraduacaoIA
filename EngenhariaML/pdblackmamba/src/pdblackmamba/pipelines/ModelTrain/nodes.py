@@ -12,31 +12,32 @@ import matplotlib.image as mpimg
 logger = logging.getLogger(__name__)
 
 def model_train(data: pd.DataFrame,type_model,  mlflowExperiment: str):
-    exp = ClassificationExperiment()
-    exp.setup(data=data, 
-              target='shot_made_flag', 
-              session_id=22, 
-              log_experiment='mlflow', 
-              experiment_name=mlflowExperiment,
-              normalize=True,
-              normalize_method="robust",           
-              )
-    
-    exp.add_metric(
-        id="log_loss",
-        name="Log Loss",
-        score_func=log_loss,
-        greater_is_better=False  
-    )
+        mlflow.set_tag("mlflow.runName", "Treinamento")        
+        exp = ClassificationExperiment()
+        exp.setup(data=data, 
+                target='shot_made_flag', 
+                session_id=22, 
+                log_experiment='mlflow', 
+                experiment_name=mlflowExperiment,
+                normalize=True,
+                normalize_method="robust",         
+                experiment_custom_tags={"mlflow.runName": f"Treinamento_{type_model}"}  
+                )
+        
+        exp.add_metric(
+            id="log_loss",
+            name="Log Loss",
+            score_func=log_loss,
+            greater_is_better=False  
+        )
 
-    model = exp.create_model(type_model)
+        model = exp.create_model(type_model)
 
-    tuned = exp.tune_model(model, n_iter= 100, optimize='F1', )
+        tuned = exp.tune_model(model, n_iter= 3, optimize='F1', )
 
-    exp.get_metrics()
+        exp.get_metrics()
 
-    return tuned
-
+        return tuned
 
 
 def get_metrics(model, dev_train, dev_test, model_type):
@@ -53,9 +54,6 @@ def get_metrics(model, dev_train, dev_test, model_type):
     log_loss_value = log_loss(Y_test, y_pred_prob)
 
     f1_value = performance_teste['macro avg']['f1-score']
-
-    mlflow.set_tag("mlflow.runName", "metrics_dev")
-
     mlflow.log_metric(f"log_loss_{model_type}_test", log_loss_value)
     mlflow.log_metric(f"f1_score_{model_type}_test", f1_value)
 
@@ -89,7 +87,7 @@ def get_metrics(model, dev_train, dev_test, model_type):
 def lat_lon_plot_model_success(model, data: pd.DataFrame, model_type):
     X_test = data[['lat','lon','minutes_remaining','period','playoffs','shot_distance']]
     Y_test = data['shot_made_flag']
-   
+
     y_pred = model.predict(X_test)
 
     lat= data['lat']
@@ -111,7 +109,7 @@ def lat_lon_plot_model_success(model, data: pd.DataFrame, model_type):
     plt.title('Arremesso na quadra', fontsize=15)
     plt.xlabel('Lon')
     plt.ylabel('Lat')
-   
+
     fullpath=current_path + f"/data/08_reporting/model_train_report/dev_{model_type}_lat_lon_shot_model_test.png"
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
@@ -120,7 +118,6 @@ def lat_lon_plot_model_success(model, data: pd.DataFrame, model_type):
 
 
 def feature_importance_plot(model, model_type):
-
     feature_names = ['lat','lon','minutes_remaining','period','playoffs','shot_distance']
 
     coefficients = model.coef_[0]  
@@ -138,8 +135,6 @@ def feature_importance_plot(model, model_type):
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
 
-    mlflow.set_tag("mlflow.runName", "metrics_dev")
-    
     mlflow.log_artifact(fullpath, artifact_path="Plots")
 
 

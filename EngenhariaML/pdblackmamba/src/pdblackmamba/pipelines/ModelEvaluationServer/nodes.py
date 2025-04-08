@@ -57,7 +57,7 @@ def generate_main_metrics(X_test, Y_test, y_pred, y_pred_prob ):
 
     result_df = pd.concat([X_test, predictions_df], axis=1)
 
-    mlflow.set_tag("mlflow.runName", "metrics_prod_server")
+    mlflow.set_tag("mlflow.runName", "PipelineAplicacao")
 
     mlflow.log_metric(f"log_loss", log_loss_value)
     mlflow.log_metric(f"f1_score", f1_value)
@@ -92,7 +92,7 @@ def generate_roc_plot( Y_test, y_pred_prob ):
 
     plt.savefig(fullpath, dpi=300, bbox_inches="tight")
     plt.close()  
-    mlflow.set_tag("mlflow.runName", "metrics_prod_server")
+    mlflow.set_tag("mlflow.runName", "PipelineAplicacao")
     
     mlflow.log_artifact(fullpath, artifact_path="Plots")
    

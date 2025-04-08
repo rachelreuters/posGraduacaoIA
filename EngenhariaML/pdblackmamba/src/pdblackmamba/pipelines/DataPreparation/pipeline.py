@@ -23,7 +23,7 @@ def create_pipeline(**kwargs) -> Pipeline:
             ),
             node(
                 func=nodes.split_train_test,
-                inputs=["dev_filtered", "params:mlflow_experiment"],
+                inputs=["dev_filtered"],
                 outputs=["dev_train", "dev_test"],
             ),
             node (
