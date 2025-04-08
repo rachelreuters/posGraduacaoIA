@@ -136,7 +136,7 @@ Na estrategia preditiva, o modelo e retreinado de forma programada com base nas 
 - Streamlit 
   - Inferencia
 Nessa tela o usuario pode realizar um teste utilizando o modelo em producao. 
-![Inputs](docs/source/StreamlitInferenciaInputs.png)
+![Inputs](docs/source/StreamlitInferenciaInputs.png) 
 O resultado da inferencia do modelo pode ser observado logo abaixo, apos o usuario clicar no botao de "Converteu?"
 ![Resposta](docs/source/StreamlitInferenciaResposta.png)
   - Analise 
@@ -145,60 +145,108 @@ Nessa tela pode ser visto varios graficos e analises dos dados, do treino do mod
 
 ## Rubricas:
 **1.1** O aluno categorizou corretamente os dados?
+
 **R:** Tanto os dados de dev quanto de prod foram filtrados com as colunas (features) citadas no pd , além disso os dados nulos foram devidamente removidos (como pede no pd). Além disso, para treino e teste do modelo, foi separado em 80, 20 os grupos de treino e teste de forma estratificada. 
+
 **1.2** O aluno integrou a leitura dos dados corretamente à sua solução?
+
 **R:** Sim, o primeiro passo do pipeline de DataPreparation é realizar o download dos dados do github conforme link citado no PD.
+
 **1.3** O aluno aplicou o modelo em produção (servindo como API ou como solução embarcada)?
+
 **R:** Sim, atraves do MLFLOW com o comando 
      mlflow models serve ^
         -m models:/kobe_lr_model_prod/latest ^
         --env-manager=local ^
         --port 5001
+
 **1.4** O aluno indicou se o modelo é aderente a nova base de dados?
+
 **R:** O modelo é aderente, porém não é eficiente, já que principalmente com relação a latitude, que é a feature com maior grau de importancia para o modelo, teve padrão diferente do dataset de treino e de teste do modelo. O próximo passo para melhoria desse modelo em produção poderia ser retreinar novamente o modelo utilizando um conjunto de dados mais abrangente. 
+
 **2.1** O aluno criou um repositório git com a estrutura de projeto baseado no Framework TDSP da Microsoft?
+
 **R:** Utilizei o Kedro conforme instruido na aula.
+
 **2.2** O aluno criou um diagrama que mostra todas as etapas necessárias para a criação de modelos?
+
 **R:**  Sim, verificar Diagrama no inicio desse documento.
+
 **2.3** O aluno treinou um modelo de regressão usando PyCaret e MLflow?
+
 **R:** Sim, é possivel observar essa lógica no nó *model_train* no pipeline de nome *ModelTrain*. (o parametro para esse nó para treinar com árvore de decisão é o regLog)
+
 **2.4** O aluno calculou o Log Loss para o modelo de regressão e registrou no mlflow?
+
 **R:** Sim, é possivel observar essa lógica no nó *get_metrics* no pipeline de nome *ModelTrain*. 
+
 ![metricasLogLossF1](docs/source/MetricsLogLossF1.png)
 
+
 **2.5** O aluno treinou um modelo de árvore de decisao usando PyCaret e MLflow?
+
 **R:** Sim, é possivel observar essa lógica no nó *model_train* no pipeline de nome *ModelTrain*. (o parametro para esse nó para treinar com árvore de decisão é o dt)
+
 **2.6** O aluno calculou o Log Loss e F1 Score para o modelo de árvore de decisão e registrou no mlflow?
+
 **R:** Sim, é possivel observar essa lógica no nó *get_metrics* no pipeline de nome *ModelTrain*. 
+
 ![metricasLogLossF1](docs/source/MetricsLogLossF1.png)
 
 **3.1** O aluno indicou o objetivo e descreveu detalhadamente cada artefato criado no projeto?
+
 **R:** No tópico Descrição dos artefatos presente nesse documento.
+
 **3.2** O aluno cobriu todos os artefatos do diagrama proposto?
+
 **R:** No tópico Descrição dos artefatos presente nesse documento.
+
 **3.3** O aluno usou o MLFlow para registrar a rodada "Preparação de Dados" com as métricas e argumentos relevantes?
+
 **R:** Salvei as metricas e parametros da preparação de dados e de treino do modelo na run do Mlflow com nome *PreparacaoDados*.
+
 **3.4** O aluno removeu os dados faltantes da base?
+
 **R:** Foram removidos os dados faltantes no nó *filter_raw_dataset*.
+
 **3.5** O aluno selecionou as colunas indicadas para criar o modelo?
+
 **R:** Foram selecionadas as colunas no nó *filter_raw_dataset*.
+
 **3.6** O aluno indicou quais as dimensões para a base preprocessada?
+
 **R:** As dimensoes da base de treino e teste (test_size e train_size) foram salvas como métrica no MLFLOW na run de nome *PreparacaoDados*. 
+
 **3.7** O aluno criou arquivos para cada fase do processamento e os armazenou nas pastas indicadas?
+
 **R:** Download inicial foi colocado na pasta 01_raw. Já os dados filtrados (remoção de nulos e seleção de colunas) está sendo salvo na pasta 03_primary. Após a separação de dados de treino e teste, esses arquivos estão sendo salvos no 05_model_input. 
+
 **3.8** O aluno separou em duas bases, uma para treino e outra para teste?
+
 **R:** Grupos de treino e teste estão sendo separados no nó *split_train_test* no pipeline de nome *DataPreparation*. Foi utilizada a técnica estratificada, garantindo que a proporção entre as classes do target seja preservada nos dois conjuntos.
+
 **3.9** O aluno criou um pipeline chamado "Treinamento" no MlFlow?
+
 **R:** Foram criados 3 pipelines de treinamento, um global que seria o resultado final dos treinamentos dos modelos e os parciais que correspondem ao treinamento do Pycaret. 
+
 ![pipelinesTreinamento](docs/source/TodasMetricasMlflow.png)
+
 **4.1** O aluno identificou a diferença entre a base de desenvolvimento e produção?
+
 **R:** Verificar resposta no tópico do PD. 
+
 **4.2** O aluno descreveu como monitorar a saúde do modelo no cenário com e sem a disponibilidade da variável alvo?
+
 **R:** Verificar resposta no tópico do PD.
+
 **4.3** O aluno implementou um dashboard de monitoramento da operação usando Streamlit?
+
 **R:**  Verificar resposta no tópico do PD. 
+
 **4.4** O aluno descreveu as estratégias reativa e preditiva de retreinamento para o modelo em operação?
+
 **R:**  Verificar resposta no tópico do PD. 
+
 
 # HOW TO:
 ## Requisitos:
