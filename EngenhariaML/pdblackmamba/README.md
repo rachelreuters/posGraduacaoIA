@@ -109,7 +109,7 @@ Scikit-Learn fornece os algoritmos fundamentais para treinamento de modelos e pr
 A separacao dos dados de teste e treino e fundamental e afeta diretamente a capacidade do modelo de generalizar para novos dados. Se os dados de treino não representam bem o problema, o modelo pode aprender de maneira enviesada ou limitada. Se o conjunto de teste não é representativo, a avaliação do modelo será imprecisa.  
 Dados de treino muito grandes e teste muito pequenos podem levar a overfitting, pois o modelo será testado em um conjunto limitado de dados.
 Por outro lado, treinar com poucos dados pode causar underfitting, já que o modelo não terá aprendido padrões suficientes. Um conjunto de treino ou teste mal balanceado (como uma classe com mais exemplos que outras) pode induzir viés nos resultados.  
--Registre os parâmetros (% teste) e métricas (tamanho de cada base) no MlFlow
+-Registre os parâmetros (% teste) e métricas (tamanho de cada base) no MlFlow  
 Estao registrados no item de pipeline *PreparacaoDados* do MLFLOW.
 ![MetricasModeloDev](docs/source/MetricasMlflowDev.png)
 -  Implementar o pipeline de treinamento do modelo e escolha do melhor modelo  
@@ -123,7 +123,7 @@ Apos essa escolha, esse modelo promovido foi utilizado para servir localmente at
 ![MetricasProdMlflow](docs/source/MetricasProd.png)
 -  O modelo é aderente a essa nova base? O que mudou entre uma base e outra? Justifique.  
 Podemos ver que, em produção, a maioria dos arremessos tem uma distância entre 20 e 30, e esses valores quase não são observados no dataset de treino do modelo. Outra coisa é sobre a latitude, que teve maior grau de importância no treinamento do modelo. Enquanto que, nos dados de treino, os valores se concentraram entre 34 e 34.1, os de produção estão concentrados na faixa de 33.8, o que pode ter ocasionado a previsão de todos os dados como sendo 0 (errou a cesta).  
-As imagens a seguir mostram os arremessos de dev e de prod, e podemos observar essa divergência citada acima. (essas análises podem ser vistas no Streamlit).
+As imagens a seguir mostram os arremessos de dev e de prod, e podemos observar essa divergência citada acima. (essas análises podem ser vistas no Streamlit).  
 ![ArremessosDev](docs/source/ArremessosDadosDev.png)
 ![ArremessosProd](docs/source/ArremessosDadosProd.png) 
 -  Descreva como podemos monitorar a saúde do modelo no cenário com e sem a disponibilidade da variável resposta para o modelo em operação.  
