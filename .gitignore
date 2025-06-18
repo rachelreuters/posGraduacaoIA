@@ -2,3 +2,4 @@ venv
 kaggle.json
 NLP/news-of-the-site-folhauol.zip
 NLP/bbc-news-summary.zip
+LLM/.env
