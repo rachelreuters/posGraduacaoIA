@@ -6,4 +6,7 @@ streamlit-folium < 0.19.99
 jupyter 
 pandas
 folium
-streamlit_folium`
+streamlit_folium
+yfinance
+pandas_ta
+langchainhub
