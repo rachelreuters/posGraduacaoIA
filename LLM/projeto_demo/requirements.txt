@@ -10,3 +10,8 @@ streamlit_folium
 yfinance
 pandas_ta
 langchainhub
+beautifulsoup4
+requests
+selenium
+undetected-chromedriver
+seleniumbase

@@ -1,5 +1,7 @@
 
 
+import os
+from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain import hub
 from langchain.agents import Tool, create_structured_chat_agent, AgentExecutor

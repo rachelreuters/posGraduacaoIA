@@ -2,4 +2,7 @@ venv
 kaggle.json
 NLP/news-of-the-site-folhauol.zip
 NLP/bbc-news-summary.zip
-LLM/.env
+LLM/exemplo_perfumes/downloaded_files/*
+LLM/exemplo_perfumes/__pycache__/*
+*.env
+downloaded_files/*
