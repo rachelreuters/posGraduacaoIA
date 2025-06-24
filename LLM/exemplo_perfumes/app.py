@@ -8,7 +8,6 @@ import pandas as pd
 
 from agent import Agent
 
-# --- CONFIGURAÇÃO INICIAL ---
 load_dotenv()
 API_KEY = os.getenv("API_GOOGLE")
 
@@ -55,42 +54,9 @@ if st.button("Encontrar Perfumes Similares"):
         
         with st.spinner("Consultando o nosso acervo de fragrâncias..."):
             try:
-                # agent = Agent(google_api_key=API_KEY)
-                # response = agent.get_similar_perfumes(prompt)                
-                # json_format = json.loads(response['output'])
-                # st.code(json.dumps(json_format, indent=4, ensure_ascii=False), language="json")
-                json_format = [
-                {
-                    "img": "https://http2.mlstatic.com/D_Q_NP_2X_721835-MLB83354304156_042025-E-perfume-arabe-khamrah-lattafa-100ml-eau-de-parfum-original.webp",
-                    "nome": "Perfume Árabe Khamrah Lattafa 100ml Eau De Parfum Original",
-                    "preco": 393.0,
-                    "link": "https://produto.mercadolivre.com.br/MLB-5124857466-perfume-arabe-khamrah-lattafa-100ml-eau-de-parfum-original-_JM#polycard_client=search-nordic&position=19&search_layout=grid&type=item&tracking_id=56a6826e-42d5-4324-8b7f-ea724f3dbf19&wid=MLB5124857466&sid=search"
-                },
-                {
-                    "img": "https://http2.mlstatic.com/D_Q_NP_2X_794567-MLA84558392742_052025-E.webp",
-                    "nome": "Jean Paul Gaultier Le Male Elixir 75ml Selo Adipec Spray",
-                    "preco": 470.0,
-                    "link": "https://www.mercadolivre.com.br/jean-paul-gaultier-le-male-elixir-75ml-selo-adipec-spray/p/MLB24630800#polycard_client=search-nordic&searchVariation=MLB24630800&wid=MLB3874201387&position=5&search_layout=grid&type=product&tracking_id=f39e80a2-ecf6-4a5c-86b6-b89f48350963&sid=search"
-                },
-                {
-                    "img": "https://http2.mlstatic.com/D_Q_NP_2X_633924-MLB82483007418_022025-E-perfume-angels-share-by-kilian-paris-genuino-com-75-ml-embalagem-original.webp",
-                    "nome": "Perfume Angels Share By Kilian Paris Genuíno Com 7,5 Ml, Embalagem Original.",
-                    "preco": 498.0,
-                    "link": "https://produto.mercadolivre.com.br/MLB-5302183176-perfume-angels-share-by-kilian-paris-genuino-com-75-ml-embalagem-original-_JM#polycard_client=search-nordic&position=13&search_layout=grid&type=item&tracking_id=87a799b7-e03c-44ab-bf36-c1532cfd5356&wid=MLB5302183176&sid=search"
-                },
-                {
-                    "img": "https://http2.mlstatic.com/D_Q_NP_2X_921730-CBT76454722268_052024-E.webp",
-                    "nome": "Perfume Xerjoff 1861 Renaissance Eau De Parfum 100ml",
-                    "preco": 2094.0,
-                    "link": "https://www.mercadolivre.com.br/perfume-xerjoff-1861-renaissance-eau-de-parfum-100ml/p/MLB2017696195#polycard_client=search-nordic&searchVariation=MLB2017696195&wid=MLB3709965609&position=9&search_layout=grid&type=product&tracking_id=da37f646-6795-47b5-9572-078321e11347&sid=search"
-                },
-                {
-                    "img": "https://http2.mlstatic.com/D_Q_NP_2X_615006-MLA50485574597_062022-E.webp",
-                    "nome": "Giorgio Armani Emporio Armani Stronger with You Intensely Pour homme EDP 50ml para masculino",
-                    "preco": 551.0,
-                    "link": "https://www.mercadolivre.com.br/giorgio-armani-emporio-armani-stronger-with-you-intensely-pour-homme-edp-50ml-para-masculino/p/MLB19312693#polycard_client=search-nordic&searchVariation=MLB19312693&wid=MLB3817717685&position=4&search_layout=grid&type=product&tracking_id=29f6eabe-2544-4fc7-a4b0-bdfa02e4e6a9&sid=search"
-                }
-                ]
+                agent = Agent(google_api_key=API_KEY)
+                response = agent.get_similar_perfumes(prompt)                
+                json_format = json.loads(response['output'])
                 if not json_format:
                     st.warning("Nenhum perfume encontrado :( ")
                 else:

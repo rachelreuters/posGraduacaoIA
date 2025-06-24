@@ -1,6 +1,7 @@
 
 
 import os
+import re
 from urllib.parse import quote_plus
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
@@ -34,7 +35,7 @@ class Agent:
                                      google_api_key=self.google_api_key)
         self.driver = get_driver()
         
-    def get_perfume_notes(self , perfume_name: str) -> str:
+    def get_perfume_notes_and_type(self , perfume_name: str) -> str:
         """
         Busca as notas olfativas de um perfume específico fazendo scraping real do site Fragrantica.
         O input deve ser o nome do perfume.
@@ -67,7 +68,6 @@ class Agent:
             perfume_url = result_link['href']
             print(f"Página do perfume encontrada: {perfume_url}")
 
-            # --- ETAPA 2: Acessar a página do perfume e extrair as notas ---
             self.driver.get(perfume_url)
 
             xpath_locator = f"//*[normalize-space() = 'Principais Acordes']"
@@ -77,11 +77,28 @@ class Agent:
             html_final = self.driver.page_source
             
             perfume_soup = BeautifulSoup(html_final, 'html.parser')
+
+
+            description =  self.driver.find_element(By.CSS_SELECTOR, "[itemprop='description']")
             
+            description_text = description.text.strip()
+
+            match = re.search(r"é um perfume\s+(\w+)", description_text, re.IGNORECASE)
+
+            if match:
+                # O grupo 1 contém a parte capturada pelos parênteses (\w+)
+                type_perfume = match.group(1)
+                print(f"Tipo de perfume '{type_perfume}'")
+            else:
+                print("Tipo de perfume não foi encontrado.")
+                
+                        
             # Encontra a seção de pirâmide olfativa
             pyramid_section = perfume_soup.find("div", id="pyramid")
             if not pyramid_section:
                 return f"Não foi possível encontrar a pirâmide olfativa na página do perfume '{perfume_name}'."
+
+            print(f"Piramide do perfume encontrada")
 
             secoes_h4 = pyramid_section.find_all("h4")
             piramide_olfativa = {}
@@ -112,33 +129,33 @@ class Agent:
                 return f"Notas não encontradas na página de '{perfume_name}', a estrutura do site pode ter mudado."
 
             # --- ETAPA 3: Formatar a saída para o agente ---
-            topo_str = ', '.join(piramide_olfativa['Notas de Topo']) if piramide_olfativa['Notas de Topo'] else 'Nenhuma'
-            coracao_str = ', '.join(piramide_olfativa['Notas de Coração']) if piramide_olfativa['Notas de Coração'] else 'Nenhuma'
-            base_str = ', '.join(piramide_olfativa['Notas de Base']) if piramide_olfativa['Notas de Base'] else 'Nenhuma'
+            topo_str = ', '.join(piramide_olfativa['Notas de Topo']) if 'Notas de Topo' in piramide_olfativa else ''
+            coracao_str = ', '.join(piramide_olfativa['Notas de Coração']) if 'Notas de Coração' in piramide_olfativa else 'Nenhuma'
+            base_str = ', '.join(piramide_olfativa['Notas de Base']) if 'Notas de Base' in piramide_olfativa else 'Nenhuma'
 
-            return f"Notas para {perfume_name}: Topo: {topo_str}; Coração: {coracao_str}; Base: {base_str}."
+            return f"Tipo de perfume: {type_perfume} , Notas para {perfume_name}: Topo: {topo_str}; Coração: {coracao_str}; Base: {base_str}."
 
         except requests.exceptions.RequestException as e:
             return f"Erro de rede ao tentar acessar o Fragrantica: {e}"
         except Exception as e:
             return f"Ocorreu um erro inesperado durante o scraping: {e}"
 
-    def find_perfumes_by_notes(self, notes_str: str) -> str:
+    def find_perfumes_by_notes_and_type(self, type_notes_str: str) -> str:
         """
         Busca no Fragrantica por perfumes que contenham um conjunto de notas olfativas.
-        O input deve ser uma string de notas separadas por vírgula.
+        O input deve ser uma string do tipo e das notas separadas por vírgula.
         Retorna uma string formatada com uma lista de nomes de perfumes similares.
         """
-        print(f"--- Iniciando scraping de busca por notas: {notes_str} ---")
+        print(f"--- Iniciando scraping de busca por tipo e notas: {type_notes_str} ---")
 
 
         try:
-            # --- ETAPA 1: Construir a URL de busca ---
-            # A forma mais simples de buscar é usar a pesquisa geral do site.
-            # Formatamos a query para algo como "perfumes com Lavanda e Ambroxan"
+            type_str, notes_str = type_notes_str.split(",", 1)
+
             query = f"{notes_str.replace(',', '~')}"
             search_query_encoded = quote_plus(query)
-            search_url = f"https://www.fragrantica.com.br/busca/?ingredients.PT={search_query_encoded}"
+
+            search_url = f"https://www.fragrantica.com.br/busca/?osobine.PT={type_str}&ingredients.PT={search_query_encoded}"
             
             print(f"Buscando em: {search_url}")
             response = self.driver.get(search_url)
@@ -151,8 +168,6 @@ class Agent:
 
             search_soup = BeautifulSoup(html_final, 'html.parser')
             
-            # --- ETAPA 2: Extrair os nomes dos perfumes da página de resultados ---
-        
             perfume_cards = search_soup.select("div.cell.card.fr-news-box")
             
             if not perfume_cards:
@@ -169,8 +184,7 @@ class Agent:
 
             if not found_perfumes:
                 return f"Não foi possível extrair nomes de perfumes para as notas: '{notes_str}'. A estrutura do site pode ter mudado."
-            
-            # --- ETAPA 3: Formatar a saída para o agente ---
+
             return f"Perfumes similares encontrados: {', '.join(found_perfumes)}."
 
         except requests.exceptions.RequestException as e:
@@ -182,9 +196,7 @@ class Agent:
 
         query = f'"{query}"'
         search_url = f'https://lista.mercadolivre.com.br/beleza-cuidado-pessoal/perfumes/{query.replace(" ", "-")}'
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36'
-        }
+
         print(f"Buscando em: {search_url}")
         response = self.driver.get(search_url)
         wait = WebDriverWait(self.driver, 15)
@@ -212,6 +224,9 @@ class Agent:
             price_tag = item.select_one('.andes-money-amount__fraction')
             link_tag = item.select_one('h3').find('a').get('href')
             image_tag = item.select_one('img')
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36'
+            }
             response = requests.get(link_tag, headers=headers, allow_redirects=True, timeout=10)
         
             link_tag = response.url
@@ -242,14 +257,14 @@ class Agent:
     def get_similar_perfumes(self, prompt):
         tools = [
             Tool(
-                name="Pegue as Notas do Perfume",
-                func=self.get_perfume_notes,
-                description="Use esta ferramenta para encontrar as notas olfativas de um perfume específico. O input deve ser o nome do perfume."
+                name="Pegue as Notas do Perfume e o Tipo",
+                func=self.get_perfume_notes_and_type,
+                description="Use esta ferramenta para encontrar as notas olfativas de um perfume específico e o seu tipo. O input deve ser o nome do perfume."
             ),
             Tool(
                 name="Busque Perfumes pelas suas notas",
-                func=self.find_perfumes_by_notes,
-                description="Use esta ferramenta para encontrar outros perfumes que compartilham um conjunto de notas. O input deve ser uma string de notas importantes, separadas por vírgula."
+                func=self.find_perfumes_by_notes_and_type,
+                description="Use esta ferramenta para encontrar outros perfumes que compartilham um conjunto de notas e tipo. O input deve ser uma string com o tipo e mais as notas importantes, separadas por vírgula."
             ),
             Tool(
                 name="Busque links e precos vendendo os Perfumes",
@@ -317,6 +332,6 @@ load_dotenv()
 
 # # print(response)
 
-# # find_perfumes_by_notes("Caramel, Fava Tonka, Vetiver")
+#agent.find_perfumes_by_notes_and_type("Oriental, Jasmim, Flor de Laranjeira, Cereus Noturno, Rosa, Baunilha, Fava Tonka, Sândalo de Mysore")
 
 # agent.find_ml_prices("Khamrah")
