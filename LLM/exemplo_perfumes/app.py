@@ -18,9 +18,9 @@ except RuntimeError:
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
 
-st.set_page_config(layout="wide", page_title="Explorador Olfativo")
+st.set_page_config(layout="wide", page_title="Dicas Olfativas")
 
-st.title("Explorador Olfativo 👃✨")
+st.title("Dicas Olfativas 👃✨")
 st.markdown("Digite o nome de um perfume que você gosta e descubra fragrâncias similares com base em suas notas olfativas.")
 
 perfume_input = st.text_input(
