@@ -1,15 +1,9 @@
 
-
-import os
-import re
-from urllib.parse import quote_plus
 from bs4 import BeautifulSoup
-from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain import hub
 from langchain.agents import Tool, create_structured_chat_agent, AgentExecutor
 import requests
-import pandas as pd
 import logging
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
