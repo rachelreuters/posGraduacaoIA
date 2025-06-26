@@ -31,11 +31,13 @@ perfume_input = st.text_input(
 if st.button("Encontrar Perfumes Similares"):
     if perfume_input:
         prompt = f"""
-        O objetivo é recomendar perfumes similares ao perfume '{perfume_input}' fornecido pelo usuário, inclusive fornecendo os links para compra
+        O objetivo é recomendar perfumes similares ao perfume '{perfume_input}' fornecido pelo usuário, inclusive fornecendo os links para compra. 
+        Nao pode incluir na lista o perfume original que o usuario colocou. 
 
         Siga estes passos obrigatórios:
         1.  Primeiro, use a ferramenta 'Get Perfume Notes' para descobrir as notas olfativas do perfume '{perfume_input}'.
-        2.  A partir da resposta, identifique as notas mais importantes (geralmente as de coração e base) e passe-as como input para a ferramenta 'Find Perfumes by Notes'. A entrada para esta ferramenta deve ser uma string de notas separadas por vírgula.
+        2.  A partir da resposta, identifique as notas mais importantes (geralmente as de coração e base) e passe-as como input para a ferramenta 'Find Perfumes by Notes'. A entrada para esta ferramenta deve ser uma string de notas separadas por vírgula. 
+            Remova o perfume original se ele estiver na lista final. 
         3.  Pegue a lista de perfumes similares, e busque no mercado livre os links e os precos de cada um dos similares encontrados anteriormente .
           4.  No final, gere uma lista com os nomes dos similares, o link da compra e o valor no formato de json como no exemplo:
             [{{

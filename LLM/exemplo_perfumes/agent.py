@@ -14,7 +14,9 @@ import logging
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+from langchain.chains import LLMChain
+from chain_get_notes import GetNotesTemplate
+from chain_get_similar_perfumes import GetSimilarPerfumesTemplate
 logging.basicConfig(level=logging.INFO)
 
 def get_driver():
@@ -22,6 +24,7 @@ def get_driver():
 
     driver = Driver(uc=True, headless=True)
     return driver
+
 
 
 class Agent:
@@ -35,162 +38,6 @@ class Agent:
                                      google_api_key=self.google_api_key)
         self.driver = get_driver()
         
-    def get_perfume_notes_and_type(self , perfume_name: str) -> str:
-        """
-        Busca as notas olfativas de um perfume específico fazendo scraping real do site Fragrantica.
-        O input deve ser o nome do perfume.
-        Retorna uma string formatada com as notas de topo, coração e base.
-        """
-        print(f"--- Iniciando scraping para: {perfume_name} ---")
-
-        try:
-            # --- ETAPA 1: Buscar pelo perfume e encontrar o link da página correta ---
-            
-            search_url = f"https://www.fragrantica.com.br/busca/?query={perfume_name}"
-            
-            print(f"Buscando em: {search_url}")
-            response = self.driver.get(search_url)
-            wait = WebDriverWait(self.driver, 15)
-            xpath_locator = f"//*[normalize-space() = 'Limpar Todos os Filtros']"
-
-            wait.until(EC.visibility_of_element_located((By.XPATH, xpath_locator)))
-            html_final = self.driver.page_source
-            search_soup = BeautifulSoup(html_final, 'html.parser')
-            
-            # Encontra o primeiro resultado da busca, que geralmente é o mais relevante
-            # O seletor CSS busca por um link dentro de um card de perfume
-            result = search_soup.select_one("div.cell.card.fr-news-box")
-            result_link = result.find("a")
-
-            if not result_link or not result_link.has_attr('href'):
-                return f"Desculpe, não consegui encontrar a página para o perfume '{perfume_name}'."
-
-            perfume_url = result_link['href']
-            print(f"Página do perfume encontrada: {perfume_url}")
-
-            self.driver.get(perfume_url)
-
-            xpath_locator = f"//*[normalize-space() = 'Principais Acordes']"
-
-            wait.until(EC.visibility_of_element_located((By.XPATH, xpath_locator)))
-
-            html_final = self.driver.page_source
-            
-            perfume_soup = BeautifulSoup(html_final, 'html.parser')
-
-
-            description =  self.driver.find_element(By.CSS_SELECTOR, "[itemprop='description']")
-            
-            description_text = description.text.strip()
-
-            match = re.search(r"é um perfume\s+(\w+)", description_text, re.IGNORECASE)
-
-            if match:
-                # O grupo 1 contém a parte capturada pelos parênteses (\w+)
-                type_perfume = match.group(1)
-                print(f"Tipo de perfume '{type_perfume}'")
-            else:
-                print("Tipo de perfume não foi encontrado.")
-                
-                        
-            # Encontra a seção de pirâmide olfativa
-            pyramid_section = perfume_soup.find("div", id="pyramid")
-            if not pyramid_section:
-                return f"Não foi possível encontrar a pirâmide olfativa na página do perfume '{perfume_name}'."
-
-            print(f"Piramide do perfume encontrada")
-
-            secoes_h4 = pyramid_section.find_all("h4")
-            piramide_olfativa = {}
-
-            for secao in secoes_h4:
-                # Pega o nome da categoria (ex: "Notas de Topo") e limpa o texto
-                categoria_nome = secao.text.strip()
-                
-                # Encontra o DIV que contém as notas, que é o "irmão" seguinte da tag <h4>
-                notas_container = secao.find_next_sibling("div")
-                
-                lista_de_notas = []
-                if notas_container:
-                    # Dentro do container, encontra todos os DIVs que representam uma nota individual
-                    # O seletor busca por DIVs que têm um atributo 'style' contendo "margin: 0.2rem"
-                    notas_individuais = notas_container.select('div[style*="margin: 0.2rem"]')
-                    
-                    for nota_div in notas_individuais:
-                        # O nome da nota é o texto dentro do último <div>
-                        nome_nota = nota_div.text.strip()
-                        lista_de_notas.append(nome_nota)
-                
-                # Adiciona a lista de notas ao nosso dicionário final
-                piramide_olfativa[categoria_nome] = lista_de_notas
-
-            # Verifica se alguma nota foi encontrada
-            if not any(piramide_olfativa.values()):
-                return f"Notas não encontradas na página de '{perfume_name}', a estrutura do site pode ter mudado."
-
-            # --- ETAPA 3: Formatar a saída para o agente ---
-            topo_str = ', '.join(piramide_olfativa['Notas de Topo']) if 'Notas de Topo' in piramide_olfativa else ''
-            coracao_str = ', '.join(piramide_olfativa['Notas de Coração']) if 'Notas de Coração' in piramide_olfativa else 'Nenhuma'
-            base_str = ', '.join(piramide_olfativa['Notas de Base']) if 'Notas de Base' in piramide_olfativa else 'Nenhuma'
-
-            return f"Tipo de perfume: {type_perfume} , Notas para {perfume_name}: Topo: {topo_str}; Coração: {coracao_str}; Base: {base_str}."
-
-        except requests.exceptions.RequestException as e:
-            return f"Erro de rede ao tentar acessar o Fragrantica: {e}"
-        except Exception as e:
-            return f"Ocorreu um erro inesperado durante o scraping: {e}"
-
-    def find_perfumes_by_notes_and_type(self, type_notes_str: str) -> str:
-        """
-        Busca no Fragrantica por perfumes que contenham um conjunto de notas olfativas.
-        O input deve ser uma string do tipo e das notas separadas por vírgula.
-        Retorna uma string formatada com uma lista de nomes de perfumes similares.
-        """
-        print(f"--- Iniciando scraping de busca por tipo e notas: {type_notes_str} ---")
-
-
-        try:
-            type_str, notes_str = type_notes_str.split(",", 1)
-
-            query = f"{notes_str.replace(',', '~')}"
-            search_query_encoded = quote_plus(query)
-
-            search_url = f"https://www.fragrantica.com.br/busca/?osobine.PT={type_str}&ingredients.PT={search_query_encoded}"
-            
-            print(f"Buscando em: {search_url}")
-            response = self.driver.get(search_url)
-            wait = WebDriverWait(self.driver, 15)
-            xpath_locator = f"//*[normalize-space() = 'Limpar Todos os Filtros']"
-
-            wait.until(EC.visibility_of_element_located((By.XPATH, xpath_locator)))
-
-            html_final = self.driver.page_source
-
-            search_soup = BeautifulSoup(html_final, 'html.parser')
-            
-            perfume_cards = search_soup.select("div.cell.card.fr-news-box")
-            
-            if not perfume_cards:
-                return f"Não encontrei resultados para perfumes com as notas: '{notes_str}'."
-
-            found_perfumes = []
-            for card in perfume_cards[:5]:
-                paragraph = card.select('p')
-                name_tag=  paragraph[0].text.strip()
-                brand_tag = paragraph[1].text.strip()
-                name_tag = " ".join([name_tag, brand_tag])    
-                if name_tag:
-                    found_perfumes.append(name_tag)
-
-            if not found_perfumes:
-                return f"Não foi possível extrair nomes de perfumes para as notas: '{notes_str}'. A estrutura do site pode ter mudado."
-
-            return f"Perfumes similares encontrados: {', '.join(found_perfumes)}."
-
-        except requests.exceptions.RequestException as e:
-            return f"Erro de rede ao tentar buscar por notas no Fragrantica: {e}"
-        except Exception as e:
-            return f"Ocorreu um erro inesperado durante o scraping da busca: {e}"
 
     def find_ml_prices(self, query: str) -> str:
 
@@ -255,15 +102,28 @@ class Agent:
         return sorted_products    
 
     def get_similar_perfumes(self, prompt):
+        get_notes_template_chain = GetNotesTemplate()
+        get_similar_template_chain =  GetSimilarPerfumesTemplate()
+
+        get_notes_chain = LLMChain(
+            llm=self.chat_model,
+            prompt=get_notes_template_chain.chat_prompt,
+        )
+
+        get_similar_list = LLMChain(
+            llm=self.chat_model,
+            prompt=get_similar_template_chain.chat_prompt,
+        )
+
         tools = [
             Tool(
                 name="Pegue as Notas do Perfume e o Tipo",
-                func=self.get_perfume_notes_and_type,
+                func=get_notes_chain.invoke,
                 description="Use esta ferramenta para encontrar as notas olfativas de um perfume específico e o seu tipo. O input deve ser o nome do perfume."
             ),
             Tool(
-                name="Busque Perfumes pelas suas notas",
-                func=self.find_perfumes_by_notes_and_type,
+                name="Busque Perfumes pelas suas notas e tipo",
+                func=get_similar_list.invoke,
                 description="Use esta ferramenta para encontrar outros perfumes que compartilham um conjunto de notas e tipo. O input deve ser uma string com o tipo e mais as notas importantes, separadas por vírgula."
             ),
             Tool(
@@ -314,15 +174,17 @@ prompt = f"""
                "link": "https//..."
             }}]
         """
-load_dotenv() 
+# load_dotenv() 
 
 
 # API_KEY = os.getenv("API_GOOGLE")
 
 # agent = Agent(API_KEY)
 
-# # response = agent.get_similar_perfumes(prompt)
+# response = agent.get_similar_perfumes(prompt)
 
+
+# print(response)
 # # import json
 # # json_format = json.loads(response['output'])
 
