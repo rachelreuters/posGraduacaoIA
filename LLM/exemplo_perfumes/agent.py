@@ -185,8 +185,10 @@ prompt = f"""
 
 
 # print(response)
-# # import json
-# # json_format = json.loads(response['output'])
+
+
+# import json
+# json_format = json.loads(response['output'])
 
 
 # # print(json_format['perfumes_similares'])
